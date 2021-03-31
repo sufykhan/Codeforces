@@ -33,22 +33,18 @@ int main(){
     rep(ii,0,t){
         cin>>n;
         vi r(n);
-        vi prer;
-        vi preb;
-        intl r1=0,b1=0;
         rep(i,0,n){
          cin>>r[i];
-         r1+=r[i];
-         prer.push_back(r1);
         }
         cin>>m;
         vi b(m);
         rep(i,0,m){
          cin>>b[i];
-         b1+=b[i];
-         preb.push_back(b1);
         }
-        print(prer);
-        print(preb);
+        partial_sum(r.begin(), r.end(), r.begin());
+	    partial_sum(b.begin(), b.end(), b.begin());
+        cout<<max(1LL*0,*max_element(r.begin(),r.end()))+max(1LL*0,*max_element(b.begin(),b.end()))<<"\n";
+        // print(prer);
+        // print(preb);
 }
 }
