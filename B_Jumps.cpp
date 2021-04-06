@@ -47,5 +47,6 @@ int main()
             c++;
         }
         cout << c << "\n";
+        
     }
 }
