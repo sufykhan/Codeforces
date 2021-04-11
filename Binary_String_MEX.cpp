@@ -57,11 +57,12 @@ int main(){
     rep(ii,0,t){
         string s;cin>>s;
         intl n=s.length();
-        rep(i,0,1025){
-            
+        rep(i,0,2049){
+            //cout<<i<<" "<<decimalToBinary(i)<<"\n";
             if(!solve(decimalToBinary(i),s))
             {
                 cout<<decimalToBinary(i)<<"\n";
+                 //cout<<i+1<<" "<<decimalToBinary(i+1)<<"\n";
                 break;
             }
         }
