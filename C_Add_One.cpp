@@ -46,24 +46,8 @@ int main()
             arr[x]++;
             d=d/10;
         }
-        intl finalans=0;
-        rep(i,0,10){
-            if(arr[i]!=0){
-                int total=0;
-               intl oper=m-(10-i);
-               if(oper>=0) 
-               {
-               total++;
-               intl dig=oper/10;
-               intl remop=oper%10;
-               total+=dig;
-               //cout<<"{"<<dig<<" "<<remop<<" "<<total<<"}<--";
-               }
-            }
-           // cout<<arr[i]<<" ,";
+       
         }
-        
         cout<<"\n";
-
-    }
 }
+
