@@ -31,23 +31,32 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
     return (a.second > b.second);
 }
-intl t, n, m;
+int t, n, m;
+intl dp[200005][11];
 int main()
 {
     FASTIO();
+    
+    memset(dp,0,sizeof(dp));
+    rep(i,0,10){
+    dp[0][i]=1;
+    }
+    for(intl i=1;i<200004;i++){
+        for(intl j=0;j<9;j++){
+            dp[i][j]=dp[i-1][j+1];
+        }
+        dp[i][9]=dp[i-1][0]+dp[i-1][1];
+    }
     cin >> t;
     rep(ii, 0, t)
     {
-        cin >> n >> m;
-        intl arr[10]={0};
-        intl d=n;
-        while(d!=0){
-            intl x=d%10;
-            arr[x]++;
-            d=d/10;
+        string s;cin>>s>>m;intl ans=0;
+        for(char x:s){
+            ans=(ans+dp[m][x-'0'])%mod;
         }
-       
-        }
-        cout<<"\n";
+        cout<<ans<<"\n";
+    }
+    
 }
 
+// f(x,m)-->f(x-1,m-1)--->if(x==9)-->f(0,m-2)+f(1,m-2)
