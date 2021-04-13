@@ -1,108 +1,74 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long intl;
-typedef vector<intl> vi;
-typedef pair<intl,intl> pi;
 
-#define F first
-#define S second
-#define pb push_back
-#define mp make_pair
-#define rep(i,a,n) for(intl i=a;i<n;i++)
-
-
-void FASTIO(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+void no() {
+  cout << "-1" << endl;
 }
 
- void print(vector<intl>v){
-for(auto x:v){
-cout<<x<<' ';
-}
-cout<<endl;
-}
-
-bool sortbySec(pair<intl,intl>&a,pair<intl,intl>&b){
-    return (a.second>b.second);
-}
-intl t,n;
-int main(){
-    FASTIO();
-    cin>>t;
-    rep(ii,0,t){
-    intl zero,one;cin>>zero>>one;
-    string s;cin>>s;
-   // cout<<one<<" "<<zero<<"\n";
-    intl n=(zero+one);bool flag=false;intl extra=0;
-    rep(i,0,n/2){
-     // cout<<s[i]<<" "<<s[n-i-1]<<endl;
-      intl x=n-i-1;
-      if(s[i]=='0'){
-          if(s[x]=='?'){
-              s[x]='0';
-          }
-          else if(s[x]=='1'){
-              flag=true;
-          }
-          zero-=2;
-      }
-      else if(s[i]=='1'){
-          if(s[x]=='?'){
-              s[x]='1';
-          }
-          else if(s[x]=='0'){
-              flag=true;
-          }
-          one-=2;
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  string s;
+  cin >> s;
+  for (int times = 0; times < 2; times++) {
+    for (int i = 0; i < (int) s.size(); i++) {
+      int j = (int) s.size() - i - 1;
+      if (s[i] != '?') {
+        if (s[j] == '?') {
+          s[j] = s[i];
+        } else if (s[i] != s[j]) {
+          no();
+          return;
+        }
       }
     }
-   
-    rep(i,0,n/2){
-        if(s[i]=='?'){
-            if(zero>0){
-                s[i]='0';
-                s[n-i-1]='0';
-                zero-=2;
-            }
-            else{
-                s[i]='1';
-                s[n-i-1]='1';
-                one-=2;
-            }
-        }
+    reverse(s.begin(), s.end());
+  }
+  a -= count(s.begin(), s.end(), '0');
+  b -= count(s.begin(), s.end(), '1');
+  int ques = count(s.begin(), s.end(), '?');
+  bool emptyMid = (s.size() % 2 == 1 && s[s.size() / 2] == '?');
+  if (a < 0 || b < 0 || a + b != ques || (emptyMid && a % 2 == 0 && b % 2 == 0)) {
+    no();
+    return;
+  }
+  if (a % 2 == 1 || b % 2 == 1) {
+    int i = s.size() / 2;
+    if (s[i] != '?') {
+      no();
+      return;
     }
-    if(n%2==1){
-        if(s[n/2]=='?'){
-        if(zero>0){
-            s[n/2]='0';
-            zero--;
-        }
-        else{
-            s[n/2]='1';
-            one--;
-        }}
-        else if(s[n/2]=='0'){
-            zero--;
-        }
-        else{
-            one--;
-        }
+    s[i] = (a % 2 == 1 ? '0' : '1');
+    if (a % 2 == 1) {
+      a--;
+    } else {
+      b--;
     }
-    if(flag){
-         cout<<"-1\n";
+  }
+  if (a % 2 == 1 || b % 2 == 1) {
+    no();
+    return;
+  }
+  for (int i = 0; i < (int) s.size(); i++) {
+    if (s[i] == '?') {
+      int j = s.size() - i - 1;
+      if (a > 0) {
+        a -= 2;
+        s[i] = s[j] = '0';
+      } else {
+        b -= 2;
+        s[i] = s[j] = '1';
+      }
     }
-    else if(zero==0 && one==0){
-         cout<<s<<"\n";
-    }
-    else{
-        cout<<"-1\n";
-    }
+  }
+  cout << s << endl;
+}
 
-    
-  
-    
+int main() {
+  int tests;
+  cin >> tests;
+  while (tests-- > 0) {
+    solve();
+  }
+  return 0;
 }
-}
-// ??010?0
-// ??010?0
