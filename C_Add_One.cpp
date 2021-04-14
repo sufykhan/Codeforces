@@ -31,7 +31,7 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
     return (a.second > b.second);
 }
-int t, n, m;
+intl t, n;
 intl dp[200005][11];
 int main()
 {
@@ -41,20 +41,22 @@ int main()
     rep(i,0,10){
     dp[0][i]=1;
     }
-    for(intl i=1;i<200004;i++){
+    for(intl i=1;i<=200003;i++){
         for(intl j=0;j<9;j++){
             dp[i][j]=dp[i-1][j+1];
         }
-        dp[i][9]=dp[i-1][0]+dp[i-1][1];
+        dp[i][9]=(dp[i-1][0]+dp[i-1][1])%mod;
     }
     cin >> t;
     rep(ii, 0, t)
-    {
+    { intl m;
         string s;cin>>s>>m;intl ans=0;
         for(char x:s){
-            ans=(ans+dp[m][x-'0'])%mod;
+           
+            ans=(ans%mod+dp[m][x-'0']%mod)%mod;
         }
-        cout<<ans<<"\n";
+        cout<<ans%mod<<"\n";
+        
     }
     
 }
