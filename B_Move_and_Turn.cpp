@@ -22,14 +22,11 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 }
 intl t;
 
-void solve (intl t){
-
-
-}
 
 int main()
 {
     FASTIO();
     cin >> t;
-    solve(t);
+    intl y=t/2+1;
+ t%2==0?cout<<y*y<<"\n":cout<<(y+1)*y*2<<"\n";
 }
