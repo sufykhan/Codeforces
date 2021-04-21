@@ -1,1 +1,1 @@
-{"name":"Local: quadeer2","url":"e:\\CODEFORCES\\quadeer2.cpp","tests":[{"id":1619008281627,"input":"6\n1 2 -3 4 5 7","output":"3 5 \n2 5 7 8"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\CODEFORCES\\quadeer2.cpp","group":"local","local":true}
+{"name":"Local: quadeer2","url":"e:\\CODEFORCES\\quadeer2.cpp","tests":[{"id":1619008281627,"input":"6\n1 2 -3 4 5 7","output":"2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\CODEFORCES\\quadeer2.cpp","group":"local","local":true}

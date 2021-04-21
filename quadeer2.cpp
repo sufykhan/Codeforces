@@ -69,14 +69,7 @@ int main()
         }
         
     }
-    // rep(i,0,neg.size()){
-    //     cout<<neg[i]<<" ";
-    // }
-    // cout<<"\n";
-    // rep(i,0,pri.size()){
-    //     cout<<pri[i]<<" ";
-    // }
-    // cout<<"\n";
+   
     intl ans=0;
     map<intl,intl>mp;
     for(intl i=0;i<pri.size()-1;i++){
