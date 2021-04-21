@@ -29,22 +29,20 @@ bool sortbySec(pair<intl,intl>&a,pair<intl,intl>&b){
 intl t,n,k;
 
 void solve(){
-    cin>>n>>k;vi v(n);intl sufy=0;
+    cin>>n>>k;vi v(n);
     rep(i,0,n){
         cin>>v[i];
-        if(v[i]>0){
-            sufy++;
-        }
-    }bool flag=false;
-    rep(i,0,n-1){
-        if(k=0){
-            break;
-        }
-        if(v[i]>0){
-            v[i]--;
-            v[i+1]++;
-            k--;
-        }
+    }
+    intl index=0;
+    while(index<n-1 && k>0){
+       if(v[index]>0){
+           v[index]--;
+           v[n-1]++;
+           k--;
+       }
+       else{
+           index++;
+       }
     }
     print(v);
 

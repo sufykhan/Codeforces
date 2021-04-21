@@ -5,7 +5,7 @@ using namespace std;
 #define rep(i,a,n) for(int i=a;i<n;i++)
 // Uses Dynamic Programming to find distinct
 // subset sums
-void printDistSum(int arr[], int n)
+void printDistSum(int arr[], int n,int gcd)
 {
 	int sum = 0;
 	for (int i=0; i<n; i++)
@@ -48,7 +48,13 @@ void printDistSum(int arr[], int n)
     }
     if(flag){
       cout<<"1\n";
-      cout<<"1\n";
+      rep(i,0,n){
+		  int xx=arr[i]/gcd;
+		  if(xx%2==1){
+			  cout<<i+1<<"\n";
+			  return;
+		  }
+	  }
     }
     else{
   cout<<"0\n";
@@ -60,10 +66,11 @@ void printDistSum(int arr[], int n)
 int main()
 {
 	int n;cin>>n;
-    int arr[n];
+    int arr[n];int wholegcd;
     rep(i,0,n){
         cin>>arr[i];
+		if(i==0) wholegcd=arr[i];
+		wholegcd=__gcd(wholegcd,arr[i]);
     }
-    printDistSum(arr,n);
+    printDistSum(arr,n,wholegcd);
 }
-
