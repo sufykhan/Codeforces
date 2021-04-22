@@ -44,73 +44,64 @@ void print(vector<intl> v)
 
 bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
-    return (a.second > b.second);
+    return (a.F < b.F);
 }
-intl t, n, w;
-
+intl t, n, W;
+const int N = 200005;
+pair<int, int> a[N];
+void solve1() {
+	std::cin >> n >> W;
+	for (int i = 1; i <= n; ++i) {
+		cin >> a[i].first;
+		a[i].second = i;
+	}
+	sort(a + 1, a + 1 + n);
+	vector<int> ans;
+	long long now = 0;
+	for (int i = n; i; --i) {
+		if (now + a[i].first <= W) {
+			now += a[i].first;
+			ans.push_back(a[i].second);
+			if (now >= (W + 1) / 2) {
+				std::cout << ans.size() << "\n";
+				for (int id : ans) {
+					std::cout << id << " ";
+				}
+				std::cout << "\n";
+				return;
+			}
+		}
+	}
+	std::cout << -1 << "\n";
+}
 void solve()
 {
-    cin >> n >> w;
-    vi v(n);
-    intl sum = 0, cnt = 0, ans = 0;
+    cin >> n >> W;
+    intl w=(W+1)/2;
+    vector<pair<intl,intl>>v;
     rep(i, 0, n)
     {
-        cin >> v[i];
-        sum += v[i];
-        if (v[i] > w)
-        {
-            cnt++;
-        }
-        if(v[i]<=w && v[i]>=(w+1)/2){
-            ans=i+1;
-        }
+        intl x;
+        cin >> x;
+        v.pb(make_pair(x,i+1));
     }
-    if(ans!=0){
-        cout<<"1\n";
-        cout<<ans<<"\n";
-        return;
-    }
-    if (sum < (w+1) / 2 || cnt == n)
-    {
-        cout << "-1\n";
-        return;
-    }
-    if (sum >= (w+1) / 2 && sum <= w)
-    {
-        rep(i, 0, n)
-        {
-            cout << i + 1 << " ";
-        }
-        cout << "\n";
-        return;
-    }
-    ans=0;vi v1;
+    sort(v.rbegin(),v.rend());
+    vi ans;intl sum=0;
     rep(i,0,n){
-        if(v[i]<(w+1)/2){
-          ans+=v[i];
-          if(ans>w){
-              ans-=v[i];
-          }
-          else
-          {
-          v1.pb(i+1);
-          }
-          if(ans<=w && ans>=(w+1)/2){
-             break;
-          }
+        if(sum+v[i].F<=W){
+            sum+=v[i].F;ans.pb(v[i].S);
+            if(sum>=w){
+                cout<<ans.size()<<"\n";
+                for(auto &xx:ans){
+                    cout<<xx<<" ";
+                }
+                cout<<"\n";
+                return;
+            }
         }
-        
     }
-    if(ans<=w && ans>=(w+1)/2){
-    cout<<v1.size()<<"\n";
-    for(auto &xx:v1){
-        cout<<xx<<" ";
-    }
-    cout<<"\n";}
-    else{
-        cout<<"-1\n";
-    
-    }
+    cout<<"-1\n";
+    return;
 }
 
 int main()
