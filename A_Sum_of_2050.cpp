@@ -46,45 +46,26 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
     return (a.second > b.second);
 }
-intl t,a,b;
-string s;
-
-void solve(){
-    cin>>a>>b>>s;intl j=0,ans=0;bool flag=false;
-    rep(i,0,s.size()){
-        if(s[i]=='0'){
-            j++;
-        }else{
-            if(flag){
-                ans+=min(a,b*j);
-                
-            }
-            j=0;
-            flag=true;
-        }
-    }
-    if(flag) ans+=a;
-   
-cout<<ans<<"\n";
-}
+intl t, n;
 int main()
 {
     FASTIO();
     cin >> t;
     rep(ii, 0, t)
     {
-         solve();
+        cin>>n;
+        if(n%2050!=0){
+            cout<<"-1\n";
+        }else{
+            n=n/2050;
+        intl sum=0;
+        while(n!=0){
+            sum+=n%10;
+            n=n/10;
+        }
+        cout<<sum<<"\n";
+        }
     }
 }
 
-// 00101000111010100-->
-// zero->1b+a,3b+a,1b+a,1b+a
-// one->1a,1a,3a,1a,1a<--grouped
-
-// 6,9 5 true
-// 6,3 9 
-
-// T F T F T
-// F T F T F
-
-// 0000001001
+//2050(x.1+y*10+z*100)
