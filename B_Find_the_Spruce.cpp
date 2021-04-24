@@ -20,13 +20,19 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
     return (a.second > b.second);
 }
-intl t, r,c;
+intl t, r, c;
+
+void solve()
+{
+    cin >> r >> c;
+}
 
 int main()
 {
     FASTIO();
     cin >> t;
-    rep(i,0,t){
-        cin>>r>>c;
+    rep(i, 0, t)
+    {
+        solve();
     }
 }

@@ -51,62 +51,34 @@ intl t, n,m;
 void solve(){
     cin>>n>>m;
     vi v;
-    intl arr[n][m];intl arr2[n][m];
+    intl arr[n][m];multiset<pair<intl,intl>>mul;
+    memset(arr,-1,sizeof(arr));
     rep(i,0,n){
         rep(j,0,m){
-            cin>>arr[i][j];
-            arr2[i][j]=0;
-            v.push_back(arr[i][j]);
+
+            intl x;
+            cin>>x;
+            mul.insert({x,i});
         }
-        
     }
-    sort(v.begin(),v.end());
-     intl cnt=0;
-     rep(i,0,n){
-         intl prevcnt=cnt;
-
-        
+    multiset<pair<intl,intl>>::iterator itr=mul.begin();
+    rep(i,0,m){
+        arr[itr->second][i]=itr->first;
+        itr++;
+    }
+    while(itr!=mul.end()){
+        intl i=itr->second;
         rep(j,0,m){
-            rep(k,0,m){
-                if(arr[i][j]==v[k]){
-                    arr2[i][cnt]=arr[i][j];v[k]=0;
-                    cnt++;
-                    arr[i][j]=-1;
-                    break;
-                }
-                
-            }
-        } 
-        // if((cnt)==prevcnt){
-        //     rep(j,0,m){
-        //         arr2[i][j]=arr[i][j];
-        //     }
-        // }
-        for(intl j=0;j<prevcnt;j++){
-            rep(k,0,m){
-                if(arr[i][k]!=-1){
-                    arr2[i][j]=arr[i][k];
-                    arr[i][k]=-1;
-                    break;
-                }
+            if(arr[i][j]==-1){
+                arr[i][j]=itr->first;
+                break;
             }
         }
-        for(intl j=cnt;j<m;j++){
-            rep(k,0,m){
-                if(arr[i][k]!=-1){
-                    arr2[i][j]=arr[i][k];
-                    arr[i][k]=-1;
-                    break;
-                }
-            }
-        }
-
-        }
-
+        itr++;
+    }
     rep(i,0,n){
         rep(j,0,m){
-           if(arr2[i][j]<200 && arr2[i][j]>0) cout<<arr2[i][j]<<" ";
-           else cout<<"? ";
+            cout<<arr[i][j]<<" ";
         }
         cout<<"\n";
     }
@@ -125,3 +97,5 @@ int main()
 //432
 //314
 //223
+
+//https://www.geeksforgeeks.org/difference-between-pair-in-multiset-and-multimap-in-c-stl/
