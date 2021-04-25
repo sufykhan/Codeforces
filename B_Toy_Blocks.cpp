@@ -46,20 +46,26 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
     return (a.second > b.second);
 }
-intl t, c;
-
+intl t, n;
 
 void solve(){
-    cin>>c;
-    
+    cin>>n;vi v(n);intl sumo=0;
+    rep(i,0,n){
+        cin>>v[i];
+        sumo+=v[i];
+    }
+    intl maxi=*max_element(v.begin(),v.end());
+    intl newm=(sumo+n-2)/(n-1);
+    maxi=max(newm,maxi);
+    cout<<(n-1)*maxi-sumo<<"\n";
 }
-
 int main()
 {
     FASTIO();
     cin >> t;
     rep(ii, 0, t)
-    {
+    { 
         solve();
+     
     }
 }
