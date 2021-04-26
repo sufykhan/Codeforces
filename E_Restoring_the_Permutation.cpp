@@ -47,7 +47,7 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
     return (a.second > b.second);
 }
 intl t, n;
-const intl N = 2e5 + 5;
+const intl N = 2e4 + 5;
 intl cnt[N];
 
 void answer(vector<intl> arr, intl n, intl ind, vector<intl> arr2,vector<intl>v)
