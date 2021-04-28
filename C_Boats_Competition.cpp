@@ -58,6 +58,7 @@ void solve()
         cin >> v[i];
         mp[v[i]]++;
     }
+    if(n==1){cout<<"0\n";return;}
     intl mx = 1;
     rep(target, 2, 101)
     {

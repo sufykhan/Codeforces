@@ -49,36 +49,40 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 intl t, n;
 
 void solve(){
-    cin>>n;vi v(n);  vi maxi(n);vi mini(n); rep(i,0,n) {cin>>v[i];mini[i]=-1;}
-  
-    intl mx=-1,mn=1e9+10;
-    //print(v);
-    rep(i,0,n){
-        if(v[i]>=mx){
-            mx=v[i];
-            mini[i]=0;
-        }
-        maxi[i]=mx;
-    }
-    //print(maxi);
+    cin>>n;vi v(n);  vi maxi(n);vi mini(n); rep(i,0,n) {cin>>v[i];}
     intl ans=0;
-    rep(i,0,n+1){
+    rep(i,0,n-1){
+        ans+=max(0LL,v[i]-v[i+1]);
+    }
+  cout<<ans<<"\n";
+    // intl mx=-1e10,mn=1e10+10;
+    // //print(v);
+    // rep(i,0,n){
+    //     if(v[i]>=mx){
+    //         mx=v[i];
+    //         mini[i]=0;
+    //     }
+    //     maxi[i]=mx;
+    // }
+    // //print(maxi);
+    // intl ans=0;
+    // rep(i,0,n){
             
-            if(mn>v[i]){
-                 mn=v[i];
-            }
-            if(mini[i]==-1) mini[i]=mn;
-            else mn=1e9+10;
+    //         if(mn>v[i]){
+    //              mn=v[i];
+    //         }
+    //         if(mini[i]==-1) mini[i]=mn;
+    //         else mn=1e9+10;
 
-            if(i>0 && mini[i]==0 && mini[i-1]>0){
-                ans+=maxi[i-1]-mini[i-1];
-            }
-    }
-    if(mini[n-1]!=0){
-        ans+=maxi[n-1]-mini[n-1];
-    }
-    //print(mini);
-    cout<<ans<<"\n";
+    //         if(i>0 && mini[i]==0 && mini[i-1]>0){
+    //             ans+=maxi[i-1]-mini[i-1];
+    //         }
+    // }
+    // if(mini[n-1]!=0){
+    //     ans+=maxi[n-1]-mini[n-1];
+    // }
+    // //print(mini);
+    // cout<<ans<<"\n";
 }
 int main()
 {
