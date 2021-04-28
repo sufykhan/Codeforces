@@ -3,6 +3,7 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "string": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "random": "cpp"
     }
 }
