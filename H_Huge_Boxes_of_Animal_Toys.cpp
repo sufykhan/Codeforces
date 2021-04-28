@@ -50,27 +50,22 @@ intl t, a,b,c,d;
 
 void solve(){
     cin>>a>>b>>c>>d;intl arr[4];
+    arr[2]=0;arr[3]=0;arr[1]=0;arr[0]=0;
     if((a+b)%2==1){
-        arr[2]=0;arr[3]=0;
-        if(d>0||a>0){
-            arr[0]=1;
-        }
-        else{
-            arr[0]=0;
-        }
-        if(b>0||c>0){
+       if(a>0||d>0){
+           arr[0]=1;
+       }
+       if(b>0||c>0){
            arr[1]=1;
-        }
-        else arr[1]=0;
+       }
     }
     else{
-        arr[1]=0;arr[0]=1;
-        if(d>0||a>0){
-            arr[3]=1;
-        }else {arr[3]=0;}
-        if(b>0||c>0){
+        if(a>0||d>0){
+           arr[3]=1;
+       }
+       if(b>0||c>0){
            arr[2]=1;
-        }else{arr[2]=0;}
+       }
     }
     rep(i,0,4){
         if(arr[i]==0) cout<<"Tidak ";
