@@ -55,42 +55,18 @@ void solve(){
     cin>>n;vector<pair<intl,intl>>v;
     rep(i,0,n){
       intl x,y;cin>>x>>y;
-      v.pb(mp(x,y-1));
+      v.pb(mp(x,1));
+      v.pb(mp(y,-1));
     }
-    sort(v);intl entry=v[0].F,exit=v[0].S; vector<vector<intl>>mega;
-    // rep(i,0,n){
-    //     cout<<v[i].F<<" "<<v[i].S<<"\n";
-    // }
-    // cout<<endl;
-    intl ans=0;intl mx=1,startingmx=entry;
-    for(int i=1;i<n;i++){
-        if(v[i].F<=exit){
-            entry=v[i].F;
-            exit=v[i].S;
-            ans++;
-        }else{
-            if(mx<ans+1){
-                startingmx=entry;mx=ans+1;
-            }
-        //    mega.pb({entry,exit,ans+1});
-           ans=0;
-           entry=v[i].F;
-           exit=v[i].S;
+    sort(v);intl mx=INT_MIN,val=-1;intl count=0;
+    for(auto&xx:v){
+        count+=xx.S;
+        if(count>mx){
+            mx=count;
+            val=xx.F;
         }
     }
-    if(ans>0){
-        if(mx<ans+1){
-            startingmx=entry;mx=ans+1;
-        }
-    }
-    // rep(i,0,mega.size()){
-    //     rep(j,0,3){
-    //         cout<<mega[i][j]<<" ";
-    //     }
-    //     cout<<endl;
-    // }
-    cout<<endl;
-   cout<<startingmx<<" "<<mx<<"\n";   
+    cout<<val<<" "<<mx<<"\n";
 }
 int main()
 {
