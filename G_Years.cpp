@@ -55,12 +55,12 @@ void solve(){
     cin>>n;vector<pair<intl,intl>>v;
     rep(i,0,n){
       intl x,y;cin>>x>>y;
-      v.pb(mp(x,1));
-      v.pb(mp(y,-1));
+      v.pb(mp(x,-1));
+      v.pb(mp(y-1,1));
     }
     sort(v);intl mx=INT_MIN,val=-1;intl count=0;
     for(auto&xx:v){
-        count+=xx.S;
+        count-=xx.S;
         if(count>mx){
             mx=count;
             val=xx.F;

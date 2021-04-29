@@ -49,16 +49,34 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 intl t, r,c;
 
 void solve(){
-    cin>>r,c;intl arr[r][c];memset(arr,0,sizeof(arr));
+    cin>>r>>c;intl arr[r][c];
     intl ans=0;
     rep(i,0,r){
         rep(j,0,c){
-            cin>>arr[i][j];
-          
+            cin>>arr[i][j];  
         }
     }
+    rep(i,0,(r+1)/2){
+        rep(j,0,(c+1)/2){
+            set<pair<intl,intl>>s;
+            s.emplace(i,j);
+            s.emplace(r-i-1,j);
+            s.emplace(r-i-1,c-j-1);
+            s.emplace(i,c-j-1);
+            vi v;
+        for(auto xx:s){
+           //cout<<xx.F+1<<" "<<xx.S+1<<"\n";
+            v.emplace_back(arr[xx.F][xx.S]);
+        }
+        cout<<"\n";
+        if(v.size()!=1){
+            sort(v.begin(),v.end());
+            for(auto z:v) ans+=abs(z-v[1]);
+        }
+        }
 
-    
+    }
+    cout<<ans<<"\n";
 }
 int main()
 {
