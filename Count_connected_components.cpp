@@ -46,32 +46,11 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
     return (a.second > b.second);
 }
-
-const intl M=1e9+7;
-intl t, r,c,b;
+intl t, n;
 
 void solve(){
-    cin>>r>>c>>b;intl arr[r][c];
-    rep(i,0,r){
-        rep(j,0,c){
-            cin>>arr[i][j];
-        }
-    }
-    intl ans=0;
-    rep(i,0,r){
-        rep(j,0,r){
-            rep(k,0,c){
-                rep(l,0,c){
-                   if(i!=j && k!=l){
-                       if(arr[i][l]+arr[i][k]+arr[j][l]+arr[j][k] ==b){
-                           ans=(ans+1)%M;
-                       }
-                   }
-                }
-            }
-        }
-    }
-    cout<<ans<<"\n";
+    cin>>n;
+    
 }
 int main()
 {

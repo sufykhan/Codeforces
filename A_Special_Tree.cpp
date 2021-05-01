@@ -46,32 +46,47 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
     return (a.second > b.second);
 }
+intl t, n,k,a,x,y;
 
-const intl M=1e9+7;
-intl t, r,c,b;
-
+void DFSUtil(int u, vector<int> adj[],
+                    vector<bool> &visited)
+{
+    visited[u] = true;
+    cout << u << " ";
+    for (int i=0; i<adj[u].size(); i++)
+        if (visited[adj[u][i]] == false)
+            DFSUtil(adj[u][i], adj, visited);
+}
+ 
+void DFS(vector<int> adj[], int V)
+{
+    vector<bool> visited(V+1, false);
+    for (int u=1; u<V+1; u++)
+        if (visited[u] == false)
+            DFSUtil(u, adj, visited);
+}
 void solve(){
-    cin>>r>>c>>b;intl arr[r][c];
-    rep(i,0,r){
-        rep(j,0,c){
-            cin>>arr[i][j];
-        }
+    cin>>n>>k>>a;
+    vi f(k);
+    vector<int>adj[n+1];
+    rep(i,0,k){
+       cin>>f[i];
     }
-    intl ans=0;
-    rep(i,0,r){
-        rep(j,0,r){
-            rep(k,0,c){
-                rep(l,0,c){
-                   if(i!=j && k!=l){
-                       if(arr[i][l]+arr[i][k]+arr[j][l]+arr[j][k] ==b){
-                           ans=(ans+1)%M;
-                       }
-                   }
-                }
-            }
-        }
+    
+    rep(i,0,n-1){
+        cin>>x>>y;
+        adj[x].pb(y);
+        adj[y].pb(x);
     }
-    cout<<ans<<"\n";
+ 
+    rep(i,1,n+1){
+        cout<<i<<"--->";
+        rep(j,0,adj[i].size()){
+            cout<<adj[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+    DFS(adj,n);
 }
 int main()
 {
