@@ -49,40 +49,42 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 intl t, n;
 
 void solve(){
-    cin>>n;vector<float>v(n);rep(i,0,n){cin>>v[i];}
-    vector<float> newv;vector<int> v1;
-    float x=*min_element(v.begin(),v.end());
+    cin>>n;vector<int>v(n);rep(i,0,n){cin>>v[i];}
+    vector<int> newv;
+    int x=*min_element(v.begin(),v.end());
+    newv=v; bool flag=true;
+     sort(newv.begin(),newv.end());
     rep(i,0,n){
-        v[i]=(float)v[i]/x;
-        intl nv=v[i]*10;
-        if(nv%10==0) v1.pb(v[i]); 
+        if(v[i]!=newv[i] && v[i]%x>0){
+            flag=false;
+        }
     }
-    newv=v;
-    sort(newv.begin(),newv.end());
-    sort(v1.begin(),v1.end());
-    bool flag=true;intl pointer=0;
+    
+   
+//     sort(v1.begin(),v1.end());
+//    intl pointer=0;
 
-    rep(i,0,n){
-       intl nv=v[i]*10;
-       if(nv%10!=0){
-           if(newv[i]!=v[i]){
-               flag=false;break;
-           }
-       }
-       else{
-           if(newv[i]!=v1[pointer]){
+//     rep(i,0,n){
+//        intl nv=v[i]*10;
+//        if(nv%10!=0){
+//            if(newv[i]!=v[i]){
+//                flag=false;break;
+//            }
+//        }
+//        else{
+//            if(newv[i]!=v1[pointer]){
                 
-                flag=false;break;
-           }
-        //    else{
-        //        cout<<"1-->";
-        //    }
-           pointer++;
-       }
-    }
-    // for(auto &xx:newv){
-    //     cout<<xx<<" ";
-    // }
+//                 flag=false;break;
+//            }
+//         //    else{
+//         //        cout<<"1-->";
+//         //    }
+//            pointer++;
+//        }
+//     }
+//     // for(auto &xx:newv){
+//     //     cout<<xx<<" ";
+//     // }
     // cout<<endl;
     // for(auto &xx:v1){
     //     cout<<xx<<" ";
