@@ -50,40 +50,20 @@ intl t, n,m,x;
 
 void solve(){
     cin>>n>>m>>x;
-    vector<pair<intl,intl>>v1(n);
-    vi v(n);rep(i,0,n) {cin>>v[i];v1.pb({v[i],i});}
-    vi v2(n);
-    sort(v1.begin(),v1.end());
-    intl x=1;
-    for(auto xx:v1){
-        intl tx=x%m;
-        if(tx==0) tx=m;
-        v2[xx.S]=tx;
-        x++;
-    }
-    if(n==1 && v[0]>x){
-        cout<<"NO\n";
-        return;
-    } 
-    if(n==1 && v[0]<=x){
-        cout<<"YES\n";
-        cout<<v[0]<<"\n";
-        return;
-    } 
-    rep(i,1,v2.size()){
-        if(abs(v2[i]-v2[i-1])>x){
-            cout<<"NO\n";
-        return;
-        }
-    }
     cout<<"YES\n";
-    for(auto xx:v2){
-    
-        cout<<xx<<" ";
+    set<pair<intl,intl>>s1;
+    for(intl i=0;i<m;i++){
+         s1.insert({0,i+1});
+    }
+    vi v(n);rep(i,0,n)
+    {
+        cin>>v[i];
+        pair<intl,intl>p=*s1.begin();
+        s1.erase(p);
+        cout<<p.S<<" ";
+        s1.insert({p.F+v[i],p.S});
     }
     cout<<"\n";
-
-    
 }
 int main()
 {
