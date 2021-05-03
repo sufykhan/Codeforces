@@ -9,7 +9,7 @@ typedef pair<intl, intl> pi;
 #define pb push_back
 #define mp make_pair
 #define rep(i, a, n) for (intl i = a; i < n; i++)
-#define sort(v) sort(v.begin(), v.end())
+//#define sort(v) sort(v.begin(), v.end())
 #define sortrev(v) sort(v.begin(), v.end(), greater<intl>())
 
 void FASTIO()
@@ -43,68 +43,92 @@ void print(vector<intl> v)
     }
     cout << endl;
 }
-
-bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
-{
-    return (a.second > b.second);
-}
 intl t, n;
 
-void solve()
-{
-    cin >> n;
-    vi uv(n);
-    vi sk(n);
-    vector<vector<intl>> v(n+1);multiset<pair<intl,intl>>muls;
-    rep(i, 0, n) { cin >> uv[i]; }
-    rep(i, 0, n) { cin >> sk[i]; }
-    rep(i, 0, n)
-    {
-        muls.insert({uv[i],sk[i]});
-        //v[uv[i]].pb(sk[i]);
+intl u[200111];
+vector<intl> g[200111];
+intl ans[200111], pref[200111];
+
+void solve1(){
+    cin>>n;
+    rep(i,1,n+1) ans[i]=1,g[i].clear();
+    rep(i,1,n+1){
+        cin>>u[i];
     }
-    for(auto xx:muls){
-        v[xx.F].pb(xx.S);
+    rep(i,1,n+1){
+        intl h;cin>>h;g[u[i]].push_back(h);
     }
-    //print(v[1]);
-    rep(i, 1, n+1)
-    {
-        
-        if(v[i].size()>1){
-            //sort(v[i]);
-        for (intl j = 1; j < v[i].size(); j++)
-        {
-            v[i][j] = v[i][j] + v[i][j - 1];
+    rep(i,1,n+1){
+        sort(g[i].begin(), g[i].end());
+        rep(j,0,(intl)g[i].size()){
+            pref[j+1]=pref[j]+g[i][j];
         }
+        rep(j,1,(intl)g[i].size()+1){
+            ans[j]+=pref[(intl)g[i].size()]-pref[(intl)g[i].size()%j];
         }
-       // print(v[i]);
     }
-    vi ans1(n); intl ans=0;
-    rep(kk, 0, n)
-    {
-        ans = 0;
-        rep(i, 1, n+1)
-        {   
-            if(v[i].size()!=0){
-            intl target = v[i].size() - 1;
-            intl rem = (target + 1) % (kk + 1);
-            if (rem == 0)
-                ans += v[i][target];
-            else
-                ans += v[i][target] - v[i][rem - 1];
-            }
-        }
-        ans1[kk]=ans;
+    for(int i=1;i<=n;i++){
+        cout<<ans[i]-1<<" ";
     }
-    print(ans1);
+    cout<<"\n";
 }
+
+
+// void solve()
+// {
+//     cin >> n;
+//     vi uv(n);
+//     vi sk(n);
+//     vector<vector<intl>> v(n+1);multiset<pair<intl,intl>>muls;
+//     rep(i, 0, n) { cin >> uv[i]; }
+//     rep(i, 0, n) { cin >> sk[i]; }
+//     rep(i, 0, n)
+//     {
+//         muls.insert({uv[i],sk[i]});
+//         //v[uv[i]].pb(sk[i]);
+//     }
+//     for(auto xx:muls){
+//         v[xx.F].pb(xx.S);
+//     }
+//     //print(v[1]);
+//     rep(i, 1, n+1)
+//     {
+        
+//         if(v[i].size()>1){
+//             //sort(v[i]);
+//         for (intl j = 1; j < v[i].size(); j++)
+//         {
+//             v[i][j] = v[i][j] + v[i][j - 1];
+//         }
+//         }
+//        // print(v[i]);
+//     }
+//     vi ans1(n); intl ans=0;
+//     rep(kk, 0, n)
+//     {
+//         ans = 0;
+//         rep(i, 1, n+1)
+//         {   
+//             if(v[i].size()!=0){
+//             intl target = v[i].size() - 1;
+//             intl rem = (target + 1) % (kk + 1);
+//             if (rem == 0)
+//                 ans += v[i][target];
+//             else
+//                 ans += v[i][target] - v[i][rem - 1];
+//             }
+//         }
+//         ans1[kk]=ans;
+//     }
+//     print(ans1);
+// }
 int main()
 {
     FASTIO();
     cin >> t;
     rep(ii, 0, t)
     {
-        solve();
+        solve1();
     }
 }
 
