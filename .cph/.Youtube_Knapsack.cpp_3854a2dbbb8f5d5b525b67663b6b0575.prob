@@ -1,0 +1,1 @@
+{"name":"Local: Youtube_Knapsack","url":"e:\\CODEFORCES\\Youtube_Knapsack.cpp","tests":[{"id":1620005528655,"input":"5 7\n6 8 8 8 8\n1 4 5 7 10","output":"1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\CODEFORCES\\Youtube_Knapsack.cpp","group":"local","local":true}
