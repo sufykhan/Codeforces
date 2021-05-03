@@ -1,0 +1,1 @@
+{"name":"Local: Q1_Rec","url":"e:\\CODEFORCES\\Youtube_DP\\Knapsack0\\Q1_Rec.cpp","tests":[{"id":1620054815711,"input":"5 8\n1 3 4 5\n1 2 6 4","output":"12"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\CODEFORCES\\Youtube_DP\\Knapsack0\\Q1_Rec.cpp","group":"local","local":true}
