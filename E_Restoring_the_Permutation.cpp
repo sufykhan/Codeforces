@@ -74,74 +74,33 @@ void answer(vector<intl> arr, intl n, intl ind, vector<intl> arr2,vector<intl>v)
     
 }
 
-void solve()
+void solve(bool yes,vi v,intl n)
 {
-    cin >> n;
-    vi v(n);
-    rep(i, 0, n) cin >> v[i];
-    vi arr;
-    vi arr1;
-    vi arr2;
-    memset(cnt, 0, sizeof(cnt));
     
-    arr.pb(v[0]);
-    arr1.pb(v[0]);
-    arr2.pb(v[0]);
-    cnt[arr[0]]++;
-    
-    rep(i, 0, n - 1)
-    {
-        if (v[i] != v[i + 1])
-        {
-            cnt[v[i + 1]]++;
-            
-            arr.pb(v[i + 1]);
-        }
-        else
-        {
-            arr.pb(0);
-        }
-    }
-
-    //print(arr);
-
-   answer(arr,n, 1,arr2,v);
-
-    memset(cnt, 0, sizeof(cnt));
-    
-    cnt[arr[0]]++;
-    
-    rep(i, 0, n - 1)
-    {
-        if (v[i] != v[i + 1])
-        {
-            cnt[v[i + 1]]++;
-            
-          
-        }
-    
-    }
-
-    rep(i, 1, n)
-    {
-        if (arr[i] == 0)
-        {
-            intl k = 1;
-            while (cnt[arr1[i - 1] - k] != 0)
-            {
-                k++;
+    set<intl>s;intl first=0;
+    rep(i,0,n){
+        intl x;x=v[i];
+        if(x>first){
+            rep(j,first+1,x){
+                s.insert(j);
             }
-            cnt[arr1[i - 1] - k]++;
-            arr1.pb(arr1[i - 1] - k);
+            cout<<x<<" ";
+            first=x;
         }
-        else
-        {
-
-            arr1.pb(arr[i]);
+        else{
+            if(yes) {
+                cout<<*s.begin()<<" ";
+                s.erase(s.begin());
+            }
+            else{
+                auto it =s.end();
+                it--;
+                cout<<*it<<" ";
+                s.erase(it);
+            }
         }
     }
-    print(arr1);
-
+    cout<<"\n";
 }
 
 int main()
@@ -150,6 +109,35 @@ int main()
     cin >> t;
     rep(ii, 0, t)
     {
-        solve();
+        cin >> n;vi v(n);
+        rep(i,0,n) cin>>v[i];
+        solve(true,v,n);
+        solve(false,v,n);
     }
 }
+
+
+// void go(bool lo) {
+//     set<int> avail;
+//     int lst = 0;
+//     F0R(i, N) {
+//         if (A[i] > lst) {
+//             FOR(j, lst+1, A[i]) {
+//                 avail.ins(j);
+//             }
+//             cout << A[i] << " ";
+//             lst = A[i];
+//         } else {
+//             if (lo) {
+//                 cout << *avail.begin() << " ";
+//                 avail.erase(avail.begin());
+//             } else {
+//                 auto it = avail.end();
+//                 it--;
+//                 cout << *it << " ";
+//                 avail.erase(it);
+//             }
+//         }
+//     }
+//     cout << nl;
+// }

@@ -53,16 +53,17 @@ void solve1(){
     intl y=0;
     tar[y]=*max_element(v.begin(),v.end());
     rep(i,0,n){if(v[i]==tar[y]) {v[i]=0;break;}}
-    
+    intl comp=tar[0];
     rep(yy,1,n){
         intl maxi=0,xx=0;
     rep(i,0,n){
-        if(__gcd(v[i],tar[yy-1])>maxi && v[i]!=0){
-            maxi=__gcd(v[i],tar[yy-1]);
+        if(__gcd(v[i],comp)>maxi && v[i]!=0){
+            maxi=__gcd(v[i],comp);
             xx=i;
         }
     }
     tar[yy]=v[xx];
+    comp=maxi;
     v[xx]=0;
     }
     print(tar);
@@ -101,6 +102,6 @@ int main()
     cin >> t;
     rep(ii, 0, t)
     {
-        solve();
+        solve1();
     }
 }
