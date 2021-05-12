@@ -54,11 +54,27 @@ void solve(){
         rep(b,a+1,n+1){
             if((m%a)%b == (m%b)%a){
                 ans++;
-                cout<<a<<" "<<b<<"\n";
+               // cout<<a<<" "<<b<<"\n";
             } 
         }
     }
     cout<<ans<<"\n";
+}
+void solve1(){
+    cin>>n>>m;intl ans=0;
+    vi v(n+1);
+    rep(i,0,n+1){
+       v[i]=1;
+    }
+    rep(i,2,n+1){
+        intl a=m%i;
+        ans+=v[a]; 
+        for(intl b=a;b<=n;b+=i){
+                v[b]++;
+        }
+    }
+    cout<<ans<<"\n";
+    
 }
 int main()
 {
@@ -66,6 +82,8 @@ int main()
     cin >> t;
     rep(ii, 0, t)
     {
-        solve();
+        solve1();
     }
 }
+
+
