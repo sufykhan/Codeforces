@@ -49,9 +49,9 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 intl t, a,b,c;
 
 void solve(){
-
+    //Ok?
     cin>>a>>b>>c;
-    if(a>=1 && b>=1 && abs(a-b)<=c){
+    if(b>a*(c+1)){
          cout<<"Yes\n";
     }
     else{
