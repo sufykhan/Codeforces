@@ -1,4 +1,3 @@
-// c83a4a7bba13170b19623bef310adcbd8e4a72ef3c503250c81cf5eb45e45743
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long intl;
@@ -48,20 +47,58 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
     return (a.second > b.second);
 }
 intl t, n;
+string s;
+
+bool isPalindrome(string str)
+{
+    // Start from leftmost and rightmost corners of str
+    int l = 0;
+    int h = str.length() - 1;
+  
+    // Keep comparing characters while they are same
+    while (h > l)
+    {
+        if (str[l++] != str[h--])
+        {
+            //printf("%s is Not Palindrome", str);
+            return false;
+        }
+    }
+    return true;
+    //printf("%s is palindrome", str);
+}
 
 void solve(){
-    cin>>n;
-    int ans=100/(__gcd(n,1LL*100));
-    cout<<ans<<"\n";
     
+    intl zero=count(s.begin(),s.end(),'0');
+    if(zero%2==1){
+        if(zero!=1) cout<<"ALICE\n";
+        else cout<<"BOB\n"; 
+    }
+    else{
+        intl x=zero/2;
+
+            cout<<"BOB\n";
+    }
+    
+}
+void solve2(){
+    if(s[n/2]=='0' && count(s.begin(),s.end(),'0')==2 && n%2==1){
+        cout<<"DRAW\n";return;
+    }
+    cout<<"ALICE\n";
 }
 int main()
 {
     FASTIO();
     cin >> t;
     rep(ii, 0, t)
-    {
-        solve();
+    { 
+        cin>>n>>s;
+        if(isPalindrome(s)){
+        solve();}
+        else{
+            solve2();
+        }
     }
 }
-

@@ -1,4 +1,3 @@
-// c83a4a7bba13170b19623bef310adcbd8e4a72ef3c503250c81cf5eb45e45743
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long intl;
@@ -50,9 +49,11 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 intl t, n;
 
 void solve(){
-    cin>>n;
-    int ans=100/(__gcd(n,1LL*100));
-    cout<<ans<<"\n";
+    cin>>n;intl ans=1;
+    double x=log2(n);
+    intl lb=floor(x);
+    intl up=ceil(x);
+    cout<<(1<<lb)-1<<"\n";
     
 }
 int main()
@@ -64,4 +65,3 @@ int main()
         solve();
     }
 }
-
