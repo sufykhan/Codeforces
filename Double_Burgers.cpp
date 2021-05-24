@@ -51,32 +51,34 @@ intl t;
 void solve(){
     intl x,y;
     cin>>x>>y;
-    intl ans=0;
+    intl ans=1000000000000000001;
     if(y%x!=0){
         cout<<"-1\n";
         return;
     }
     y=y/x;
-    map<intl,intl>mp;
-    while(y!=0){
-        if(y<0){
-            cout<<"-1\n";
-            return;
-        }
-        if(ans!=0){
-            ans++;
-        }
-        intl c=log2(y+1);
-        while(mp.find(c)!=mp.end()){
-          c--;
-        }
-        mp[c]++;
-        ans+=c;
-        y-=(1<<c)-1;
-
+    rep(i,1,61){
+       intl target=y+i;
+       if(target&1LL){
+           continue;
+       }
+       intl count=0,minutes=0;
+       rep(j,0,61){
+          if(target&(1LL<<j)){
+              count++;
+              minutes+=j;
+          }
+       }
+       if(count==i){
+          ans=min(ans,minutes+count-1);
+       }
     }
+    if(ans==1000000000000000001){
+        cout<<"-1\n";
+    }
+    else{
     cout<<ans<<"\n";
-    
+    }
 }
 int main()
 {
@@ -87,7 +89,3 @@ int main()
         solve();
     }
 }
-
-
-// 125-->1+2+4+8
-//77->1+2+4 ,1+2,1
