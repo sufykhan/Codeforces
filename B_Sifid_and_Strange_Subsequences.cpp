@@ -1,83 +1,76 @@
 #include <bits/stdc++.h>
+ 
+#define fulcrum(...) ;
+#ifndef promising
+#define dump(...)
+#endif
+ 
+#define E 2.718281828459045
+#define PI 3.141592653589793
+#define M3 998244353
+#define M7 1000000007
+#define INF 0x3fffffff
+#define INF64 0x3fffffff3fffffff
+ 
+const int P=M3;
+ 
+#define loop(i,n) for(int i=0;i<(n);i++)
+#define lback(i,n) for(int i=(n)-1;i>=0;i--)
+#define rep(i,l,r) for(int i=(l);i<(r);i++)
+#define rback(i,l,r) for(int i=(r)-1;i>=(l);i--)
+#define all(x) (x).begin(),(x).end()
+#define tri(op,a,b,c) op(op(a,b),c)
+#define isz(x) ((int)(x).size())
+#define iln(x) ((int)(x).length())
+ 
+#define mid (l+(r-l)/2)
+#define lson (x<<1)
+#define rson (x<<1|1)
+ 
 using namespace std;
-typedef long long intl;
-typedef vector<intl> vi;
-typedef pair<intl, intl> pi;
-
-#define F first
-#define S second
-#define pb push_back
-#define mp make_pair
-#define rep(i, a, n) for (intl i = a; i < n; i++)
-
-void FASTIO()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+ 
+typedef long long ll;
+typedef unsigned int uint;
+typedef unsigned long long ull;
+typedef pair<int,int> pii;
+typedef pair<long long,int> pli;
+typedef pair<long long,long long> pll;
+typedef complex<double> cp;
+template<class T> using vector2D = vector<vector<T>>;
+template<class T> using vector3D = vector<vector2D<T>>;
+ 
+template<class T> bool umax(T &x, T y) { return (x<y)? x=y,true: false; }
+template<class T> bool umin(T &x, T y) { return (x>y)? x=y,true: false; }
+ 
+void prepare() {
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
 }
-
-bool isPrime(intl n)
-{
-    if (n <= 1)
-        return false;
-    if (n <= 3)
-        return true;
-
-    if (n % 2 == 0 || n % 3 == 0)
-        return false;
-
-    for (intl i = 5; i * i <= n; i = i + 6)
-        if (n % i == 0 || n % (i + 2) == 0)
-            return false;
-
-    return true;
-}
-
-void print(vector<intl> v)
-{
-    for (auto x : v)
-    {
-        cout << x << ' ';
-    }
-    cout << endl;
-}
-
-bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
-{
-    return (a.second > b.second);
-}
-intl t, n;
-
-void solve(){
+ 
+void solve() {
+    int n;
     cin>>n;
-    intl ans=0;
-    map<intl,intl>mp;bool flag=true;
-    rep(i,0,n){
-        intl x;cin>>x;
-        if(x>0 && flag){
-            ans++;
-            flag=false;
+    vector<int> a(n);
+    loop(i,n) cin>>a[i];
+    sort(all(a));
+    int ans=0,gap=INF;
+    loop(i,n) {
+        if(a[i]<=0) {
+            if(i) umin(gap,a[i]-a[i-1]);
+            ++ans;
         }
-        mp[x]++;
-    }
-    intl ans2=0;
-    for(auto xx:mp){
-        if(xx.F<=0){
-            ans++;
-            ans2+=xx.S;
+        if(a[i]>0) {
+            if(a[i]<=gap) ++ans;
+            break;
         }
     }
-
-    ans=max(ans2,ans);
-    cout<<ans<<"\n";
-    
+    cout<<ans<<endl;
 }
-int main()
-{
-    FASTIO();
-    cin >> t;
-    rep(ii, 0, t)
-    {
-        solve();
-    }
+ 
+int main() {
+    prepare();
+    int T;
+    cin>>T;
+    while(T--) solve();
+    return 0;
 }
