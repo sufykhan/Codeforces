@@ -48,54 +48,47 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 }
 intl t, n;
 
-void rec(intl health,vector<intl>v,intl current,intl ans,intl &val){
-      if(health<0 || current>v.size()){
-          return;
-      }
-      val=max(val,ans);
-      rec(health,v,current+1,ans,val);
-      health+=v[current];
-      rec(health,v,current+1,ans+1,val);
-}
-
-
 void solve(){
-    cin>>n;vi v(n);
+    cin>>n;
+    vi arr(n);
+    intl flag=false;
     rep(i,0,n){
-        cin>>v[i];
-    }
-    intl dp[n+1][n+1]; //dp[number of potions][number of potions dranked]
-    rep(i,0,n+1){
-        rep(j,0,n+1){
-   dp[i][j]=-1;
+        cin>>arr[i];
+        if(arr[i]<0){
+            flag=true;
         }
     }
-    rep(i,0,n+1){
-        dp[0][i]=0;
-        dp[i][0]=0;
+    if(n==1){
+        cout<<"YES\n";
+        cout<<"1\n";
+        cout<<arr[0]<<"\n";
+        return;
     }
-    rep(i,1,n+1){
-        rep(j,1,n+1){
-                if(dp[i-1][j-1]+v[i]>=0){
-                dp[i][j]=max(dp[i-1][j-1]+v[i],dp[i-1][j]);
-                }
-                else{
-                    dp[i][j]=dp[i-1][j];
-                }
-          
-        }
+    if(flag){
+        cout<<"NO\n";
+        return;
     }
-    for(intl i=n;i>=0;i--){
-      cout<<dp[n][i]<<" ";
+    // intl ans=arr[0];
+    // intl maxi=*max_element(arr.begin(),arr.end());
+    // intl mini=*min_element(arr.begin(),arr.end());
+    // vi v;
+    // rep(i,1,n){
+    //     ans=__gcd(ans,arr[i]);
+    // }
+    cout<<"YES\n";
+    cout<<"101\n";
+    rep(i,0,101){
+       cout<<i<<" ";
     }
     cout<<"\n";
-   
-    // intl val=-1;
-    // rec(1LL*0,v,1LL*0,1LL*0,val);
-    // cout<<val<<"\n";
+    
 }
 int main()
 {
     FASTIO();
+    cin >> t;
+    rep(ii, 0, t)
+    {
         solve();
+    }
 }

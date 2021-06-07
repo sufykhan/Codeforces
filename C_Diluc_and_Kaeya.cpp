@@ -48,54 +48,26 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 }
 intl t, n;
 
-void rec(intl health,vector<intl>v,intl current,intl ans,intl &val){
-      if(health<0 || current>v.size()){
-          return;
-      }
-      val=max(val,ans);
-      rec(health,v,current+1,ans,val);
-      health+=v[current];
-      rec(health,v,current+1,ans+1,val);
-}
-
-
 void solve(){
-    cin>>n;vi v(n);
+    cin>>n;
+    string s;cin>>s;
+    map<pair<intl,intl>,intl>m;
+    intl cntd=0,cntk=0;
     rep(i,0,n){
-        cin>>v[i];
-    }
-    intl dp[n+1][n+1]; //dp[number of potions][number of potions dranked]
-    rep(i,0,n+1){
-        rep(j,0,n+1){
-   dp[i][j]=-1;
-        }
-    }
-    rep(i,0,n+1){
-        dp[0][i]=0;
-        dp[i][0]=0;
-    }
-    rep(i,1,n+1){
-        rep(j,1,n+1){
-                if(dp[i-1][j-1]+v[i]>=0){
-                dp[i][j]=max(dp[i-1][j-1]+v[i],dp[i-1][j]);
-                }
-                else{
-                    dp[i][j]=dp[i-1][j];
-                }
-          
-        }
-    }
-    for(intl i=n;i>=0;i--){
-      cout<<dp[n][i]<<" ";
+        (s[i]=='D'?cntd:cntk)++;
+        intl g=__gcd(cntk,cntd);
+        pair<intl,intl>xx={cntd/g,cntk/g};
+        m[xx]++;
+        cout<<m[xx]<<" ";
     }
     cout<<"\n";
-   
-    // intl val=-1;
-    // rec(1LL*0,v,1LL*0,1LL*0,val);
-    // cout<<val<<"\n";
 }
 int main()
 {
     FASTIO();
+    cin >> t;
+    rep(ii, 0, t)
+    {
         solve();
+    }
 }
