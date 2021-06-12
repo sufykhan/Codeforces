@@ -64,14 +64,35 @@ intl countPair(intl arr[], intl size, intl a, intl b) {
 
 void solve(){
     intl l,r;cin>>n>>l>>r;
-    intl arr[n];
+    vi v(n);
   
     rep(i,0,n){
-        cin>>arr[i];
+        cin>>v[i];
     }
-    sort(arr, arr + n);
-    intl ans=countPair(arr,n,l,r);
-    cout<<ans<<"\n";
+    sort(v.begin(),v.end());
+
+
+    rep(i,0,n){
+
+    }
+    //print(v);intl ans=0;
+    // intl ans=0;
+    // for(intl i=n-1;i>=0;i--){
+    //     intl x=l-v[i];
+    //     intl y=r-v[i];
+    //     if((x>v[i] && y>v[i]) ||(x<=0 && y<=0)) continue;
+    //     if(x>v[i]) x=v[i];
+    //     if(y>v[i]) y=v[i];
+    //     //cout<<v[i]<<"--> ("<<x<<","<<y<<")\n";
+    //     intl starting=upper_bound(v.begin(),v.end(),x-1)-v.begin();
+    //     intl ending=lower_bound(v.begin(),v.end(),y)-v.begin();
+    //     if(starting==i) starting+=1;
+    //     if(ending==i) ending-=1;
+    //     ans+=max(1LL*0,ending-starting+1);
+    //     //cout<<starting<<" "<<ending<<"\n";
+    //     // ans+=ending-starting;
+    // }
+    // cout<<ans<<"\n";
 }
 int main()
 {

@@ -46,48 +46,44 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
     return (a.second > b.second);
 }
-intl t, n;
+intl t, a,b,k;
 
-
-//dp[totaldrank][pos]=max(dp[totaldrank-1][pos-1]+v[pos],dp[totaldrank][pos-1])
-//dp[0][x]=0;
-
+int cnt(int n){
+    int res=0;
+    for(int i=2;i*i<n;i++){
+          while(n%i==0){
+              n=n/i;
+              res++;
+          }
+          
+    }
+    if(n>1) res++;
+    return res;
+}
 void solve(){
-    cin>>n;vi v(n+1);
-    rep(i,1,n+1){
-        cin>>v[i];
+    cin>>a>>b>>k;
+    if((cnt(a)+cnt(b))<k){
+      cout<<"NO\n";return;
     }
-    intl dp[n+1][n+1];
-    rep(i,0,n+1){
-        rep(j,0,n+1){
-            dp[i][j]=(-1e18);
+    if(k>1){
+        cout<<"YES\n";
+    }
+    else{
+        if((a%b==0 || b%a==0) && a!=b){
+            cout<<"YES\n";
         }
-    }
-    rep(i,0,n+1){
-        dp[i][0]=0; 
-    }
-    rep(i,1,n+1){
-        rep(j,1,n+1){
-            if((dp[i-1][j-1]+v[i])>=0){
-                dp[i][j]=max(dp[i-1][j-1]+v[i],dp[i-1][j]);
-            }
-            else{
-                dp[i][j]=dp[i-1][j ];
-            }
+        else{
+            cout<<"NO\n";
         }
-    }
-    for(int i=n;i>=0;i--){
-       if(dp[n][i]>=0){
-           cout<<i<<"\n";return;
-       }
     }
     
 }
 int main()
 {
     FASTIO();
+    cin >> t;
+    rep(ii, 0, t)
+    {
         solve();
+    }
 }
-
-//  4 4 5 5 6 6
-//  0 4 4 7 7 10
