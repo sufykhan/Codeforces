@@ -48,32 +48,54 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 }
 
 intl MOD=1e9+7;
-intl t, nn;
+intl t, n;
 
+void DFS(intl start,vector<intl>v[],bool *visited){
+       visited[start]=true;
+        for(auto x:v[start]){
+            if(!visited[x]){
+                DFS(x,v,visited);
+            }
+        }
+}
 
 void solve(){
-    cin>>nn;vi v1(nn);vi v2(nn);
-    rep(i,0,nn){
+    cin>>n;vi v1(n);vi v2(n);
+    rep(i,0,n){
         cin>>v1[i];
     }
-    rep(i,0,nn){
+    rep(i,0,n){
         cin>>v2[i];
     }
-    map<pair<intl,intl>,int>m;
-    rep(i,0,nn){
-        m[{min(v1[i],v2[i]),max(v1[i],v2[i])}]++;
+    vector<intl>v[n+1];
+    rep(i,0,n){
+        v[v2[i]].push_back(v1[i]);
+        v[v1[i]].push_back(v2[i]);
     }
-    intl total=0,ans=1;
-    for(auto xx:m){
-       total+=xx.second-1;
+    intl components=0;
+    bool visited[n+1];
+    memset(visited,0,sizeof(visited));
+    rep(i,1,n+1){
+        if(!visited[i]){
+            components++;
+            DFS(i,v,visited);
+        }
     }
-    //cout<<total<<"\n";
-    rep(i,0,total+1){
-            ans=(2*ans)%MOD;
+    //cout<<components<<"\n";
+    intl ans=1;
+    rep(i,0,components){
+      ans=(2*ans)%MOD;
     }
-
     cout<<ans<<"\n";
-    
+    // for(intl i=1;i<=n;i++){
+    //     cout<<i<<"-->";
+    //     for(auto z:v[i]){
+    //         cout<<z<<" ";
+    //     }
+    //     cout<<"\n";
+    // }
+    // cout<<"\n";
+
 }
 int main()
 {
