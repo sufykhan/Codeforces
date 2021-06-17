@@ -47,49 +47,88 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
     return (a.second > b.second);
 }
 intl t, n;
-bool compare(string s){
-    int n=s.length(),start=-1;char comp,bcomp;
+
+void solve(){
+    string s;cin>>s;
+    n=s.length();intl comp=-1;intl cnt=0;
+   // cout<<s<<"\n";
+    stack<char>st;
+    vector<intl>v;
+    intl ans=0;
     rep(i,0,n){
-        if(s[i]!='?'){
-               start=i;
-               comp=s[i];
-               if(int(comp-'0')){
-                   bcomp='0';
+        if(s[i]=='0'){
+            st.push(0);
+            if(comp==-1) {comp=1;cnt++;}
+            else{
+               int t1=s[i]-'0';
+               if(t1==comp){
+
+                   comp=1;
+                   cnt++;
                }
                else{
-                   bcomp='1';
+                   comp=1;
+                   ans+=(cnt*(cnt+1))/2;
+                   //v.push_back(cnt);
+                   st.pop();
+                  intl xx=0;
+                   while(!st.empty() && st.top()=='?'){
+                       xx++;
+                       st.pop();
+                   }
+                   while(!st.empty()){
+                       st.pop();
+                   }
+                   ans-=(xx*(xx+1))/2;
+                   cnt=1+xx;
                }
-               break;
+            }
         }
+        if(s[i]=='1'){
+            st.push(0);
+            if(comp==-1) {comp=0;cnt++;}
+            else{
+               int t1=s[i]-'0';
+               if(t1==comp){
+                   comp=0;
+                   cnt++;
+               }
+               else{
+                  comp=0;
+                  ans+=(cnt*(cnt+1))/2;
+                  // v.push_back(cnt);
+                   st.pop();
+                   intl xx=0;
+                   while(!st.empty() && st.top()=='?'){
+                       xx++;
+                       st.pop();
+                   }
+                   while(!st.empty()){
+                       st.pop();
+                   }
+                   ans-=(xx*(xx+1))/2;
+                   cnt=1+xx;
+               }
+            }
+        }
+        if(s[i]=='?'){
+            st.push('?');
+            cnt++;
+            if(comp!=-1){
+                if(comp==0) comp=1;
+                else comp=0;
+            }
+            
+        }
+        
     }
-     rep(i,0,n){
-         if(i%2==start%2){
-             if(!(s[i]==comp || s[i]=='?')){
-                 return false;
-             }
-         }
-         else{
-             if(!(s[i]==bcomp || s[i]=='?')){
-                 return false;
-             }
-         }
-     }
-     return true;
-}
-void solve(){
-  string s;cin>>s;
-  intl n=s.size(),ans=0;
-//   cout<<n<<"\n";
-  rep(i,0,n){
-      rep(j,1,n-i+1){
-          string cal=s.substr(i,j);
-          if(compare(cal)){
-              ans++;
-              //cout<<cal<<" ";
-          }
-      }
-  }
+    if(cnt!=0) {
+      ans+=(cnt*(cnt+1))/2;
+     // v.push_back(cnt);
+    }
     cout<<ans<<"\n";
+   // print(v);
+    
 }
 int main()
 {
@@ -100,10 +139,3 @@ int main()
         solve();
     }
 }
-
-
-// ?10??1100
-//010101||10||0
-
-//0?10
-//01|10
