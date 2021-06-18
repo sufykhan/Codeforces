@@ -5,6 +5,7 @@
         "string": "cpp",
         "chrono": "cpp",
         "random": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "vector": "cpp"
     }
 }
