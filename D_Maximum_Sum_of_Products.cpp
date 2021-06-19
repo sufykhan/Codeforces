@@ -65,6 +65,37 @@ void solve(){
     rep(i,0,n){
         cin>>v2[i];
     }
+    intl dp[n][n];
+    memset(dp,0,sizeof(dp));
+    for(intl i=0;i<n;i++){
+        for(intl j=0;j<n;j++){
+            if(i==j){
+                dp[i][j]=v1[i]*v2[j];
+            }
+            else{
+                if((j-i)==1){
+                    dp[i][j]=v1[i]*v2[j]+v1[j]*v2[i];
+                }
+            }
+        }
+    }
+
+    for(int k=0;k<n;k++){
+        int i=k,j=k;
+        while(i>0 && j<n){
+            dp[i-1][j+1]=dp[i][j]+v1[i-1]*v2[j+1]+v1[j+1]*v2[i-1];
+            i--;j++;
+        } 
+    }
+    for(int k=0;k<n;k++){
+        int i=k,j=k+1;
+        while(i>0 && j<n){
+            dp[i-1][j+1]=dp[i][j]+v1[i-1]*v2[j+1]+v1[j+1]*v2[i-1];
+            i--;j++;
+        } 
+    }
+ 
+    //cout<<sumA(v1,v2,1,3)<<" "<<dp[1][3]<<"\n";
     intl pref[n+1]={0};
     rep(i,0,v1.size()){
         if(i==0) pref[i+1]=v1[i]*v2[i];
@@ -74,22 +105,23 @@ void solve(){
     intl ans=0;
     rep(i,0,n){
       rep(j,i,n){
-       reverse(v1.begin()+i,v1.begin()+j+1);
+      //reverse(v1.begin()+i,v1.begin()+j+1);
       // print(v1);
      //  ans=max(pref[i]+pref[n-j-1]+sumA(v1,v2,i,j+1),ans);
      //  cout<<"sum-->"<<pref[i]+pref[n-j-1]+sumA(v1,v2,i,j)<<"\n";
       // cout<<i<<","<<j<<"\n";
        //cout<<pref[n]-pref[j+1]+pref[i]+sumA(v1,v2,i,j+1)<<"[]\n";
 
-       ans=max(ans,pref[n]-pref[j+1]+pref[i]+sumA(v1,v2,i,j+1));
-       reverse(v1.begin()+i,v1.begin()+j+1);
+       ans=max(ans,pref[n]-pref[j+1]+pref[i]+dp[i][j]);
+      // cout<<sumA(v1,v2,i,j+1)<<"--<"<<i<<","<<j<<">--"<<dp[i][j]<<"\n";
+      //reverse(v1.begin()+i,v1.begin()+j+1);
       // print(v1);
        //cout<<"***\n";
       }
      // cout<<i<<"*******\n";
        
     }
-    cout<<ans<<"\n";
+   cout<<ans<<"\n";
     
 }
 int main()
