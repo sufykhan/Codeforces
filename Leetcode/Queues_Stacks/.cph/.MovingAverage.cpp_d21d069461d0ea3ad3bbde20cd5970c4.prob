@@ -1,0 +1,1 @@
+{"name":"Local: MovingAverage","url":"e:\\CODEFORCES\\Leetcode\\Queues_Stacks\\MovingAverage.cpp","tests":[{"id":1623529885261,"input":"3 4\n1\n5\n4\n3","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\CODEFORCES\\Leetcode\\Queues_Stacks\\MovingAverage.cpp","group":"local","local":true}

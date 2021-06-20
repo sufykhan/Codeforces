@@ -49,11 +49,13 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 intl t, l,r;
 
 void solve(){
-    cin>>l>>r;
-    rep(i,l,r){
-        
+    cin>>l>>r;intl ans=0;
+    ans+=r-l;intl mul=1LL*10;
+    while(r/mul>0){
+             ans+=r/mul-l/mul;
+             mul=mul*1LL*10;
     }
-    
+    cout<<ans<<"\n";
 }
 int main()
 {
@@ -64,3 +66,5 @@ int main()
         solve();
     }
 }
+
+
