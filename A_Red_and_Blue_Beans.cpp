@@ -46,18 +46,17 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
     return (a.second > b.second);
 }
-intl t, a,b,c;
+intl t, r,b,d;
 
 void solve(){
     //Ok?
-    cin>>a>>b>>c;
-    if(b>a*(c+1)){
-         cout<<"Yes\n";
+    cin>>r>>b>>d;
+    if(min(r,b)*(1+d)>=max(r,b)){
+        cout<<"YES\n";
     }
     else{
-        cout<<"No\n";
+        cout<<"NO\n";
     }
-    
 }
 int main()
 {

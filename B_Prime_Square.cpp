@@ -46,20 +46,45 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
     return (a.second > b.second);
 }
-intl t, x,y;
-
+intl t, n;
+intl primes[50];
 void solve(){
-    cin>>x>>y;
-    intl ans=0;
-    y=min(x-1,y);
-    for(intl i = 1; i*i < x; i++) ans+=max(min(y,x/i-1)-i,0LL);
-    cout<<ans<<'\n';
+    cin>>n;
+    intl target=0;
+    rep(i,0,30){
+        if(primes[i]/n==1){
+            target=i;
+            break;
+        }
+    }
+    while(isPrime(primes[target]-n+1)){
+        target++;
+    }
+    rep(i,0,n){
+        rep(j,0,n){
+            if(i==j){
+                cout<<primes[target]-n+1<<" ";
+            }
+            else{
+                cout<<"1 ";
+            }
+        }
+        cout<<"\n";
+    }
+    //cout<<primes[target]<<"\n";
+    
 }
-
-
 int main()
 {
     FASTIO();
+    intl cnt=0;
+    rep(i,1,500){
+        if(isPrime(i)){
+            primes[cnt++]=i;
+           // cout<<i<<"\n";
+        }
+    }
+    //cout<<cnt<<"\n";
     cin >> t;
     rep(ii, 0, t)
     {
