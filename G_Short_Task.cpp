@@ -48,18 +48,57 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 }
 intl t, c;
 
+const intl MAX = 1e7+5;
+   
+int divisor[MAX + 1];
+ 
+
+void sieve()
+{
+    for (int i = 1; i <= MAX; ++i) {
+        for (int j = i; j <= MAX; j += i)
+            divisor[j]+=i;
+    }
+}
 
 void solve(){
     cin>>c;
+    if(isPrime(c-1)){
+        cout<<c-1<<"\n";
+        return;
+    }
+    intl ans=0;
+    for(int i=2;i*i<c;i++){
+      if(c%i==0){
+          if(i==c/i) ans+=i;
+          else ans+=i+c/i;
+      }
+    }
     
 }
-
+int ans[MAX+1];
 int main()
 {
     FASTIO();
+    sieve();
+    
+    fill(ans,ans+MAX+1,-1);
+
+    for(intl i=MAX+1;i>=1;i--){
+       if(divisor[i]<=MAX) ans[divisor[i]]=i; 
+    }
+    // for(auto x:vp){
+    //     cout<<x.first<<" "<<x.second<<"\n";
+    // }
     cin >> t;
     rep(ii, 0, t)
     {
-        solve();
+        cin>>c;
+        if(ans[c]!=-1){
+            cout<<ans[c]<<"\n";
+        }
+        else{
+            cout<<"-1\n";
+        }
     }
 }
