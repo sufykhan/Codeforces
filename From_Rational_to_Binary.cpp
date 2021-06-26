@@ -46,32 +46,16 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
     return (a.second > b.second);
 }
-intl t, n;
+intl t, a,b;
 
 void solve(){
-    cin>>n;
-    vi v(n+1);
-    intl sum=0;
-    rep(i,1,n+1){
-        cin>>v[i];
-        sum+=v[i];
+    cin>>a>>b;
+    if(ceil(log2(b))==floor(log2(b)) && a==1){
+        cout<<"Yes\n";
     }
-    sort(v.begin()+1,v.end());
-    intl ans=0,pref=0;
-    rep(i,1,n+1){
-        ans-=v[i]*(i-1)-pref;
-        pref=pref+v[i];
+    else{
+        cout<<"No\n";
     }
-    ans+=v[n];
-    // vi pref(n);
-    // rep(i,2,n){
-    //     if(i==2) pref[i]=v[i-2];
-    //     else   pref[i]+=pref[i-1]+v[i-2];
-    // }
-    // rep(i,2,n){
-    //     ans+=pref[i]-v[i]*(i-1);
-    // }
-    cout<<ans<<'\n';
     
 }
 int main()

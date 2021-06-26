@@ -1,80 +1,275 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
+typedef long long intl;
+typedef vector<intl> vi;
+typedef pair<intl, intl> pi;
 
-int win[8][3] = {{0, 1, 2}, 
-				{3, 4, 5}, 
-				{6, 7, 8}, 
-				{0, 3, 6},
-				{1, 4, 7}, 
-				{2, 5, 8}, 
-				{0, 4, 8}, 
-				{2, 4, 6}}; 
+#define F first
+#define S second
+#define pb push_back
+#define mp make_pair
+#define rep(i, a, n) for (intl i = a; i < n; i++)
 
-bool isCWin(char *board, char c)
+void FASTIO()
 {
-	
-	for (int i=0; i<8; i++)
-		if (board[win[i][0]] == c &&
-			board[win[i][1]] == c &&
-			board[win[i][2]] == c )
-			return true;
-	return false;
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
 }
 
-bool isValid(char board[9])
+bool isPrime(intl n)
 {
-	int xCount=0, oCount=0;
-	for (int i=0; i<9; i++)
-	{
-	if (board[i]=='X') xCount++;
-	if (board[i]=='O') oCount++;
-	}
-	if (xCount==oCount || xCount==oCount+1)
-	{
-	
-		if (isCWin(board, 'O'))
-		{
-		
-			if (isCWin(board, 'X'))
-				return false;
-			return (xCount == oCount);
-		}
-		if (isCWin(board, 'X') && xCount != oCount + 1)
+	if (n <= 1)
+		return false;
+	if (n <= 3)
+		return true;
+
+	if (n % 2 == 0 || n % 3 == 0)
 		return false;
 
-		return true;
-	}
-	return false;
+	for (intl i = 5; i * i <= n; i = i + 6)
+		if (n % i == 0 || n % (i + 2) == 0)
+			return false;
+
+	return true;
 }
 
-// Driver program
+void print(vector<intl> v)
+{
+	for (auto x : v)
+	{
+		cout << x << ' ';
+	}
+	cout << endl;
+}
+void printp(vector<pair<intl,intl>> v)
+{
+	for (auto x : v)
+	{
+		cout << x.first << ','<<x.second<<" ";
+	}
+	cout << endl;
+}
+
+bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
+{
+	return (a.second > b.second);
+}
+intl t, n,m,k;
+
+void solve(){
+	cin>>n>>m>>k;
+	map<intl,intl>alic;
+	map<intl,intl>bob;
+
+
+	map<intl,intl>alicAA;
+	map<intl,intl>bobAA;
+	rep(i,0,n*m){
+		    intl x,y;
+			cin>>x>>y;
+			if(i%2==0){
+				
+				alic[(x-1)*m+y]=i;
+				alicAA[i]=(x-1)*m+y;
+			}
+			else{
+				bob[(x-1)*m+y]=i;
+				bobAA[i]=(x-1)*m+y;
+			}
+	}
+	// for(auto x:alicAA){
+	// 	cout<<x.first<<" "<<x.second<<"\n";
+	// }
+	// cout<<'\n';
+	
+
+	intl alic1=-1;
+	bool flag=false;
+	intl cnt=0;
+	for(auto x:alicAA){
+		cnt++;
+		rep(i,0,k){
+			rep(j,0,k){
+			  intl comp=(x.S+i*m)+j;
+			  //cout<<comp<<" ";
+			  if(alic.find(comp)!=alic.end()){
+				  //cout<<"ggff\n";
+				  alic1=max(alic[comp],alic1);
+			  }
+			  else{
+				  alic1=-1;
+				  break;
+			  }
+			}
+			if(alic1==-1){
+				break;
+			}
+		}
+	
+		if(alic1!=-1){
+			//cout<<alic1<<"Found\n";
+			flag=true;
+			break;
+		}
+	 }
+//cout<<'\n';
+
+// for(auto x:bobAA){
+// 		cout<<x.first<<" "<<x.second<<"\n";
+// 	}
+//     cout<<'\n';
+	intl balic1=-1;
+	bool bflag=false;
+	intl bcnt=0;
+	// if(alic.find(6)!=alic.end())
+	// {cout<<"ff"<<"\n";}
+	for(auto x:bobAA){
+		bcnt++;
+		rep(i,0,k){
+			rep(j,0,k){
+			  intl comp=(x.S+i*m)+j;
+			  //cout<<comp<<" ";
+			  if(bob.find(comp)!=bob.end()){
+				  //cout<<"ggff\n";
+				  balic1=max(bob[comp],balic1);
+			  }
+			  else{
+				  balic1=-1;
+				  break;
+			  }
+			}
+			if(balic1==-1){
+				break;
+			}
+		}
+		if(balic1!=-1){
+			//cout<<balic1<<"Found\n";
+			bflag=true;
+			break;
+		}
+	 }
+    
+	//cout<<alic1<<" "<<balic1<<"\n";
+	if(balic1==-1 && alic1==-1){
+		cout<<"Draw\n";
+		return;
+	}
+	if(balic1==-1 && alic1!=-1){
+		cout<<"Alice\n";
+		return;
+	}
+	
+	if(alic1==-1 && balic1!=-1){
+		cout<<"Bob\n";
+		return;
+	}
+	if(balic1<alic1){
+		cout<<"Bob\n";
+		return;
+	}
+	if(balic1>alic1){
+		cout<<"Alice\n";
+		return;
+	}
+	
+	
+}
 int main()
 {
-    int t;cin>>t;
-    for(int i=0;i<t;i++){
-        char board[9];int reach=0;
-        for(int j=0;j<3;j++){
-              string s;cin>>s;
-              for(int k=0;k<3;k++){
-                  board[3*j+k]=(char)s[k];
-                  if(board[3*j+k]=='_') reach++;  
-              }
-        }
-       
-        if(isValid(board)){
-            if(reach>0 && !(isCWin(board,'X')||isCWin(board,'O'))){
-                cout<<"2\n";
-            }
-            else{
-            cout<<"1\n";
-            }
-        }
-        else{
-            cout<<"3\n";
-        }
-    }
-
+	FASTIO();
+	cin >> t;
+	rep(ii, 0, t)
+	{
+		solve();
+	}
 }
+
+
+
+
+
+
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// int win[8][3] = {{0, 1, 2}, 
+// 				{3, 4, 5}, 
+// 				{6, 7, 8}, 
+// 				{0, 3, 6},
+// 				{1, 4, 7}, 
+// 				{2, 5, 8}, 
+// 				{0, 4, 8}, 
+// 				{2, 4, 6}}; 
+
+// bool isCWin(char *board, char c)
+// {
+	
+// 	for (int i=0; i<8; i++)
+// 		if (board[win[i][0]] == c &&
+// 			board[win[i][1]] == c &&
+// 			board[win[i][2]] == c )
+// 			return true;
+// 	return false;
+// }
+
+// bool isValid(char board[9])
+// {
+// 	int xCount=0, oCount=0;
+// 	for (int i=0; i<9; i++)
+// 	{
+// 	if (board[i]=='X') xCount++;
+// 	if (board[i]=='O') oCount++;
+// 	}
+// 	if (xCount==oCount || xCount==oCount+1)
+// 	{
+	
+// 		if (isCWin(board, 'O'))
+// 		{
+		
+// 			if (isCWin(board, 'X'))
+// 				return false;
+// 			return (xCount == oCount);
+// 		}
+// 		if (isCWin(board, 'X') && xCount != oCount + 1)
+// 		return false;
+
+// 		return true;
+// 	}
+// 	return false;
+// }
+
+// // Driver program
+// int main()
+// {
+//     int t;cin>>t;
+//     for(int i=0;i<t;i++){
+//         char board[9];int reach=0;
+//         for(int j=0;j<3;j++){
+//               string s;cin>>s;
+//               for(int k=0;k<3;k++){
+//                   board[3*j+k]=(char)s[k];
+//                   if(board[3*j+k]=='_') reach++;  
+//               }
+//         }
+       
+//         if(isValid(board)){
+//             if(reach>0 && !(isCWin(board,'X')||isCWin(board,'O'))){
+//                 cout<<"2\n";
+//             }
+//             else{
+//             cout<<"1\n";
+//             }
+//         }
+//         else{
+//             cout<<"3\n";
+//         }
+//     }
+
+// }
 
 
 

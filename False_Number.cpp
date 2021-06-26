@@ -49,29 +49,13 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 intl t, n;
 
 void solve(){
-    cin>>n;
-    vi v(n+1);
-    intl sum=0;
-    rep(i,1,n+1){
-        cin>>v[i];
-        sum+=v[i];
+    string s;cin>>s;
+    if((s[0]-'0')>1){
+        cout<<"1"<<s<<"\n";
     }
-    sort(v.begin()+1,v.end());
-    intl ans=0,pref=0;
-    rep(i,1,n+1){
-        ans-=v[i]*(i-1)-pref;
-        pref=pref+v[i];
+    else{
+        cout<<s[0]<<"0"<<string(s.begin()+1,s.end())<<"\n";
     }
-    ans+=v[n];
-    // vi pref(n);
-    // rep(i,2,n){
-    //     if(i==2) pref[i]=v[i-2];
-    //     else   pref[i]+=pref[i-1]+v[i-2];
-    // }
-    // rep(i,2,n){
-    //     ans+=pref[i]-v[i]*(i-1);
-    // }
-    cout<<ans<<'\n';
     
 }
 int main()

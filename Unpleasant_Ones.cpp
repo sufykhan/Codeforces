@@ -39,7 +39,6 @@ void print(vector<intl> v)
     {
         cout << x << ' ';
     }
-    cout << endl;
 }
 
 bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
@@ -50,29 +49,19 @@ intl t, n;
 
 void solve(){
     cin>>n;
-    vi v(n+1);
-    intl sum=0;
-    rep(i,1,n+1){
-        cin>>v[i];
-        sum+=v[i];
+    vi odd;vi even;
+    rep(i,0,n){
+        intl x;cin>>x;
+        if(x%2==1){
+             odd.push_back(x);
+        }
+        else{
+            even.push_back(x);
+        }
     }
-    sort(v.begin()+1,v.end());
-    intl ans=0,pref=0;
-    rep(i,1,n+1){
-        ans-=v[i]*(i-1)-pref;
-        pref=pref+v[i];
-    }
-    ans+=v[n];
-    // vi pref(n);
-    // rep(i,2,n){
-    //     if(i==2) pref[i]=v[i-2];
-    //     else   pref[i]+=pref[i-1]+v[i-2];
-    // }
-    // rep(i,2,n){
-    //     ans+=pref[i]-v[i]*(i-1);
-    // }
-    cout<<ans<<'\n';
-    
+    print(even);
+    print(odd);
+    cout<<'\n';
 }
 int main()
 {
