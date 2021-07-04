@@ -1,75 +1,79 @@
-// C++ program to generate all prime numbers
-// less than N in O(N)
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-const long long MAX_SIZE = 1000001;
+typedef long long intl;
+typedef vector<intl> vi;
+typedef pair<intl, intl> pi;
 
-// isPrime[] : isPrime[i] is true if number is prime
-// prime[] : stores all prime number less than N
-// SPF[] that store smallest prime factor of number
-// [for Exp : smallest prime factor of '8' and '16'
-// is '2' so we put SPF[8] = 2 , SPF[16] = 2 ]
-vector<long long >isprime(MAX_SIZE , true);
-vector<long long >prime;
-vector<long long >SPF(MAX_SIZE);
+#define F first
+#define S second
+#define pb push_back
+#define mp make_pair
+#define rep(i, a, n) for (intl i = a; i < n; i++)
 
-// function generate all prime number less then N in O(n)
-void manipulated_seive(int N)
+void FASTIO()
 {
-	// 0 and 1 are not prime
-	isprime[0] = isprime[1] = false ;
-
-	// Fill rest of the entries
-	for (long long int i=2; i<N ; i++)
-	{
-		// If isPrime[i] == True then i is
-		// prime number
-		if (isprime[i])
-		{
-			// put i into prime[] vector
-			prime.push_back(i);
-
-			// A prime number is its own smallest
-			// prime factor
-			SPF[i] = i;
-		}
-
-		// Remove all multiples of i*prime[j] which are
-		// not prime by making isPrime[i*prime[j]] = false
-		// and put smallest prime factor of i*Prime[j] as prime[j]
-		// [ for exp :let i = 5 , j = 0 , prime[j] = 2 [ i*prime[j] = 10 ]
-		// so smallest prime factor of '10' is '2' that is prime[j] ]
-		// this loop run only one time for number which are not prime
-		for (long long int j=0;
-			j < (int)prime.size() &&
-			i*prime[j] < N && prime[j] <= SPF[i];
-			j++)
-		{
-			isprime[i*prime[j]]=false;
-
-			// put smallest prime factor of i*prime[j]
-			SPF[i*prime[j]] = prime[j] ;
-		}
-	}
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
 }
 
-// driver program to test above function
+bool isPrime(intl n)
+{
+	if (n <= 1)
+		return false;
+	if (n <= 3)
+		return true;
+
+	if (n % 2 == 0 || n % 3 == 0)
+		return false;
+
+	for (intl i = 5; i * i <= n; i = i + 6)
+		if (n % i == 0 || n % (i + 2) == 0)
+			return false;
+
+	return true;
+}
+
+void print(vector<intl> v)
+{
+	for (auto x : v)
+	{
+		cout << x << ' ';
+	}
+	cout << endl;
+}
+
+bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
+{
+	return (a.second > b.second);
+}
+intl t, n;
+intl vec[55];
+intl mod=1e9+7;
+void solve(){
+	cin>>n;
+	intl ans1=0,prev=0;
+    for(intl i=1;i<42;i++){
+		intl cnt=n-n/vec[i];
+		ans1=(ans1+i*(cnt-prev))%mod;
+		prev=cnt;
+	}
+	cout<<ans1<<"\n";
+}
+
 int main()
 {
-	int N = 20 ; // Must be less than MAX_SIZE
-
-	manipulated_seive(N);
-
-	for(long long x=1e15;x<1e16+10000;x++){
-        for (int i=0; i<prime.size(); i++){
-            if(x%prime[i]!=0){
-                cout<<x<<"--> "<<prime[i]<<"\n";
-                break;
-            }
-        }
-		
-    }
+	FASTIO();
+	intl ans=1;
+	vec[1]=1;
+	rep(i,2,42){
+		vec[i]=ans*i/(__gcd(ans,i));
+		ans=vec[i];
+		//cout<<vec[i]<<" ";
+	}
 	
-
-	return 0;
+	cin >> t;
+	rep(ii, 0, t)
+	{
+		solve();
+	}
 }

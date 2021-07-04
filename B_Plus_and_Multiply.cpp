@@ -50,19 +50,16 @@ intl t, a,b,n;
 
 void solve(){
     cin>>n>>a>>b;
-    int st=1;
-    for(intl i=1;i<1e9;i++){
-        if((n-st)%b==0){
-            cout<<"Yes\n";
+    for (intl cur = 1; cur <= n; cur *= a) {
+        if ((n - cur) % b == 0) {
+            cout << "Yes" << '\n';
             return;
         }
-        if(n-st<0) {
-            cout<<"No\n";
-            return;
+        if(a==1){
+            cout<<"No\n";return;
         }
-        st=st*a;
     }
-    cout<<"No\n";    
+    cout << "No" << '\n'; 
 }
 int main()
 {
