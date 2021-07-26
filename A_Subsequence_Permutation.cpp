@@ -46,31 +46,26 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
     return (a.second > b.second);
 }
-intl t, n,k;
+intl t, n;
+string s;
 
 void solve(){
-    cin>>n>>k;
-    vector<intl>a(n,2e9);
-    vector<intl>b(k);
-    vector<intl>c(k);
-    rep(i,0,k) cin>>b[i];
-    rep(i,0,k) {cin>>c[i];a[b[i]-1]=c[i];}
-    
-    vi ans(n,2e9);
-    intl r=2e9;
+    cin>>n>>s;
+    vi v(n);
+    vi vs(n);
     rep(i,0,n){
-        r=min(a[i],r);
-        ans[i]=min(ans[i],r);
-        r++;
+        intl x=s[i]-'a';
+        v[i]=x;
+        vs[i]=x;
     }
-    r=2e9;
-    for(intl i=n-1;i>=0;i--){
-        r=min(a[i],r);
-        ans[i]=min(ans[i],r);
-        r++;
+    sort(vs.begin(),vs.end());
+    intl cnt=0;
+    rep(i,0,n){
+        if(vs[i]!=v[i]){
+            cnt++;
+        }
     }
-    print(ans);
-    
+    cout<<cnt<<"\n";
 }
 int main()
 {

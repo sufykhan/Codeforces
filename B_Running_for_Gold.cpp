@@ -46,31 +46,33 @@ bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
 {
     return (a.second > b.second);
 }
-intl t, n,k;
+intl t, n;
 
 void solve(){
-    cin>>n>>k;
-    vector<intl>a(n,2e9);
-    vector<intl>b(k);
-    vector<intl>c(k);
-    rep(i,0,k) cin>>b[i];
-    rep(i,0,k) {cin>>c[i];a[b[i]-1]=c[i];}
-    
-    vi ans(n,2e9);
-    intl r=2e9;
-    rep(i,0,n){
-        r=min(a[i],r);
-        ans[i]=min(ans[i],r);
-        r++;
+    cin>>n;
+    intl arr[n+1][5+1];
+    rep(i,1,n+1){
+        rep(j,1,5+1){
+            cin>>arr[i][j];
+        }
     }
-    r=2e9;
-    for(intl i=n-1;i>=0;i--){
-        r=min(a[i],r);
-        ans[i]=min(ans[i],r);
-        r++;
+    vector<vector<pair<intl,intl>>>v(n+1);
+    rep(i,1,n+1){
+        rep(j,1,6){
+              v[i].push_back({arr[i][j],j});
+        }
+        sort(v[i].begin(),v[i].end());
     }
-    print(ans);
     
+
+    rep(i,1,n+1){
+        for(auto x:v[i]){
+            cout<<"("<<x.F<<" , "<<x.S<<") ";
+            //cout<<x.S<<" ";
+        }
+        cout<<"\n";
+    }
+    cout<<"\n";
 }
 int main()
 {
@@ -81,3 +83,5 @@ int main()
         solve();
     }
 }
+
+//5 3 2 4 1
