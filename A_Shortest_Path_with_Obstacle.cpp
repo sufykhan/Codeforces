@@ -16,51 +16,67 @@ void FASTIO()
     cin.tie(NULL);
 }
 
-bool isPrime(intl n)
-{
-    if (n <= 1)
-        return false;
-    if (n <= 3)
-        return true;
 
-    if (n % 2 == 0 || n % 3 == 0)
-        return false;
-
-    for (intl i = 5; i * i <= n; i = i + 6)
-        if (n % i == 0 || n % (i + 2) == 0)
-            return false;
-
-    return true;
-}
-
-void print(vector<intl> v)
-{
-    for (auto x : v)
-    {
-        cout << x << ' ';
+int maxD(vector<vector<int>>& graphs) {
+        map<pair<double, double>, set<int> > mp;
+        map<int, set<int> > xmp;
+        int n=graphs.size();
+        if(n==1){
+            return 1;
+        }
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                if(graphs[j][0]-graphs[i][0]!=0){
+                    double m=(graphs[j][1]-graphs[i][1])/(1.0*(graphs[j][0]-graphs[i][0]));
+                    double c=(graphs[j][1]-(m*graphs[j][0]));
+                    if(mp.find({m,c})!=mp.end()){
+                        mp[{m,c}].insert(i);
+                        mp[{m,c}].insert(j);
+                    }else{
+                        set<int> st;
+                        st.insert(i);
+                        st.insert(j);
+                        mp[{m,c}]=st;
+                    }
+                }
+                else{
+                    if(xmp.find(graphs[i][0])!=xmp.end()){
+                        xmp[graphs[i][0]].insert(i);
+                        xmp[graphs[i][0]].insert(j);
+                    }else{
+                        set<int> st;
+                        st.insert(i);
+                        st.insert(j);
+                        xmp[graphs[i][0]]=st;
+                    }
+                }
+            }
+        }
+        int ans=0;
+        for(auto it:mp){
+            set<int> st=it.second;
+            ans=max(ans, (int)st.size());
+        }
+        for(auto it:xmp){
+            set<int> st=it.second;
+            ans=max(ans, (int)st.size());
+        }
+        return ans;
     }
-    cout << endl;
-}
 
-bool sortbySec(pair<intl, intl> &a, pair<intl, intl> &b)
-{
-    return (a.second > b.second);
-}
-intl n,q,w,e,r,t,y;
-
-void solve(){
-    cin>>q>>w>>e>>r>>t>>y;
-    intl ans=abs(q-e)+abs(w-r);
-    if((q==e && e==t && y>min(w,r) && y<max(w,r) )||(w==r&&r==y && t>min(q,e) && t<max(q,e))) ans+=2;
-    cout<<ans<<"\n";
-    
-}
 int main()
 {
     FASTIO();
-    cin >> n;
-    rep(ii, 0, n)
-    {
-        solve();
-    }
+    int n,sej;
+	cin>>n>>sej;
+	
+	vector<vector<int>> vec(sej,vector<int>(2,0));
+	
+	for(int i=0;i<sej;i++){
+	    cin>>vec[i][0]>>vec[i][1];
+	}
+	
+	cout<<maxD(vec);
+	
+	return 0;
 }
