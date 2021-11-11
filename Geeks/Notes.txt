@@ -1,0 +1,5 @@
+Min&Max in minimum comparisons(3*n/2)
+(0,1,2 sort algo)Dutch National Flag Problem(https://users.monash.edu/~lloyd/tildeAlgDS/Sort/Flag/)
+Kth Minimum element(#LEARN MINHEAP AND BINARY TREE#)
+Kadane's Algorithm(Why add something that reduces you)
+
