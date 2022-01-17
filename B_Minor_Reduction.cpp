@@ -8,9 +8,11 @@ void solve(){
     for(int i=n-2;i>=0;i--){
         int one=s[i]-'0';
         int two=s[i+1]-'0';
-        if(one+two>10) {
+        if(one+two>=10) {
             flag=1;
-            change=to_string(one+two);
+            stringstream ss;
+            ss << (one+two);
+            change=ss.str();
             pos=i;
         }
     }
@@ -18,15 +20,18 @@ void solve(){
         pos=0;
         int x=s[0]-'0';
         x+=s[1]-'0';
-        change=to_string(x);
+        stringstream ss;
+        ss << (x);
+        change=ss.str();
     }
     for(int i=0;i<n;i++){
         if(i==pos){
-           cout<<change<<"\n";i++;
+           cout<<change;i++;
         }else{
-        cout<<s[i]<<" ";
+        cout<<s[i];
         }
     }
+    cout<<"\n";
 }
 int main(){
     int t;cin>>t;
