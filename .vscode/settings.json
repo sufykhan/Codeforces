@@ -16,5 +16,8 @@
         "system_error": "cpp",
         "bitset": "cpp"
     },
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "cmake.mingwSearchDirs": [
+        "${env:SystemDrive}/mysys2/mingw64"
+    ]
 }
