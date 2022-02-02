@@ -28,3 +28,23 @@ for(int i=0;i<n;i++){
 
 }
 
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int n;cin>>n;
+	vector<int>v(n);
+	vector<int>maxi(n);
+	int ans=0;
+	for(int i=0;i<n;i++){
+		cin>>v[i];
+		if(i==0) maxi[i]=v[i];
+		else{
+			maxi[i]=max(v[i],maxi[i-1]);
+			ans=max(ans,maxi[i]-v[i]);
+		}
+	}
+	cout<<ans<<"\n";
+	return 0;
+}
+

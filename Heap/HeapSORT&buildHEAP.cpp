@@ -29,7 +29,7 @@ int main()
     int n=11;
     vector<int>arr={1, 3, 5, 4, 6, 13, 10, 9, 8, 15, 17};
     
-    int targeti=n/2-1;
+    int targeti=n/2-1; //because all others are already heapified as they are leaf nodes;
     for(int i=targeti;i>=0;i--){
         for(int i1=0;i1<11;i1++){
         cout<<arr[i1]<<" ";
