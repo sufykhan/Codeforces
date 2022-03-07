@@ -2,6 +2,8 @@
 // for subset sum problem
 #include <iostream>
 using namespace std;
+#define int long long
+
 bool isSubsetSum(int set[], int n, int sum)
 {
 	bool subset[n + 1][sum + 1];
@@ -32,10 +34,10 @@ bool isSubsetSum(int set[], int n, int sum)
 }
 
 // Driver code
-int main()
+int32_t main()
 {
-	int set[] = { 9, 1, 3, 4, 8, 2 };
-	int sum = 6;
+	int set[] = { 9, 1, 3, 4, 8, 2};
+	int sum =15;
 	int n = sizeof(set) / sizeof(set[0]);
 	if (isSubsetSum(set, n, sum) == true)
 		cout <<"Found a subset with given sum";

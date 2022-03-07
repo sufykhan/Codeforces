@@ -55,9 +55,21 @@ void solve(){
 int main()
 {
     FASTIO();
-    cin >> t;
+    //cin >> t;
+    t=1;
     rep(ii, 0, t)
     {
-        solve();
+        //solve();
+        int a=0;
+        for(int i=1;i<=100;i++){
+            if(a%2==1){
+                a+=i;
+            }
+            else{
+                a-=2;
+            }
+        }
+        cout<<a;
     }
+    
 }
