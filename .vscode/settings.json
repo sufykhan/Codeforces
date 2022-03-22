@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.cpp": "cpp",
         "iostream": "cpp",
         "ostream": "cpp",
         "string": "cpp",
@@ -14,7 +15,13 @@
         "unordered_map": "cpp",
         "unordered_set": "cpp",
         "system_error": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "array": "cpp",
+        "iterator": "cpp",
+        "string_view": "cpp",
+        "scoped_allocator": "cpp",
+        "span": "cpp",
+        "regex": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled",
     "cmake.mingwSearchDirs": [

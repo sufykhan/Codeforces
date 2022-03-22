@@ -31,9 +31,7 @@ int main() {
     cin >> tc;
     while (tc--) {
         int V, E;
-        cin >> V >>
-
-            E;
+        cin >> V >>E;
 
         vector<int> adj[V];
 
