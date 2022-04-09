@@ -4,7 +4,6 @@ using namespace std;
 
 
 class Graph{
-    
     int V;
     list<int>*adj;
     void DFS(vector<bool>&vis,int src);

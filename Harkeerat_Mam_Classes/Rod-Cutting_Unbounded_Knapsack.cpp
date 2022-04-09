@@ -24,7 +24,7 @@ void solve()
     rep(i, 0, n)
     {
         cin >> val[i];
-    }
+    } 
     intl dp[n+1][n+1];
 
     //i-->rod size
