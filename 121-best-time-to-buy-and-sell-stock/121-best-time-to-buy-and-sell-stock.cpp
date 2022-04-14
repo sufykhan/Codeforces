@@ -1,12 +1,12 @@
 class Solution {
 public:
     int maxProfit(vector<int>&arr) {
-    int mini=INT_MAX,maxi=0; 
-    for(int i=0;i<arr.size();i++){
-      mini=min(mini,arr[i]);
-      maxi=max(arr[i]-mini,maxi);
+    int currM=0,globalM=0;
+    for(int i=1;i<arr.size();i++){
+      currM=max(0,currM+=arr[i]-arr[i-1]);
+      globalM=max(currM,globalM);
     }
-        return maxi;
+    return globalM;
            
     }
 };
