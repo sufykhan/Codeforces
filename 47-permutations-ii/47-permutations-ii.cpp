@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void recur(int idx,vector<int>&nums,vector<int>val,vector<vector<int>>&ans,vector<bool>&vis){
+    void recur1(int idx,vector<int>&nums,vector<int>val,vector<vector<int>>&ans,vector<bool>&vis){
         
         if(val.size()==nums.size()) {
             ans.push_back(val);
@@ -18,6 +18,28 @@ public:
                 vis[i]=false;
                 val.pop_back();
             }
+        }
+        
+    }
+    void recur(int idx,vector<int>&nums,vector<int>val,vector<vector<int>>&ans,vector<bool>&vis){
+        
+        if(idx==nums.size()) {
+            ans.push_back(nums);
+            return;
+        }
+        for(int i=idx;i<nums.size();i++){
+            
+            if(i!=idx && nums[i]==nums[idx]) {
+                continue;
+            }
+            
+            
+            swap(nums[i],nums[idx]);
+            recur(idx+1,nums,val,ans,vis);
+            
+        }
+        for (int i = nums.size() - 1; i > idx; --i) {
+                swap(nums[idx], nums[i]);
         }
         
     }
