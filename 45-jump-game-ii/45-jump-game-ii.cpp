@@ -22,6 +22,8 @@ public:
                 k++; 
             }
             i=pos-1;
+            
+            
         }
         return total;
         
