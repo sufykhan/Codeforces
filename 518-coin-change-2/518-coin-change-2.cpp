@@ -1,6 +1,10 @@
 class Solution {
 public:
+    
+    
     int change(int amount, vector<int>& arr) {
+        
+        
         int n=arr.size();
         int m=amount;
         
