@@ -12,7 +12,7 @@
 class Solution {
 public:
     int ans=0;
-    int recur(TreeNode* root,int &cnt){
+    int recur(TreeNode* &root,int &cnt){
         
         if(root==nullptr){
             return 0;
