@@ -36,8 +36,11 @@ public:
             
             swap(nums[i],nums[idx]);
             recur(idx+1,nums,val,ans,vis);
+            //swap(nums[i],nums[idx]);
             
         }
+        for(auto x:nums) cout<<x<<" ";
+        cout<<"\n";
         for (int i = nums.size() - 1; i > idx; --i) {
                 swap(nums[idx], nums[i]);
         }
@@ -53,3 +56,5 @@ public:
         return ans;
     }
 };
+
+//[[1,1,2,2],[1,2,1,2],[1,2,2,1],[1,1,2,2],[2,1,1,2],[2,1,2,1],[2,2,1,1],[2,1,1,2],[2,1,2,1],[1,1,2,2],[1,2,1,2],[1,2,2,1],[1,1,2,2]]
