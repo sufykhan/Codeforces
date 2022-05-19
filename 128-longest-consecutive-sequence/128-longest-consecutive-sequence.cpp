@@ -7,7 +7,6 @@ public:
        
         int i=0;
         for(auto x:nums){
-            //cout<<x<<" ";
             mp[x]=i;
             dp[x]=0;
             i++;
@@ -34,9 +33,9 @@ public:
             }
             for(int j=xx;j>nums[i];j--){
                 dp[j-1]=dp[j]+1;
-                cout<<"xx->"<<j<<"-->"<<dp[j]<<" ,";
+                
             }
-            cout<<"\n";
+       
             maxi=max(maxi,dp[nums[i]]);
        
         }
