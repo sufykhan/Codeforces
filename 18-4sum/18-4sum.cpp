@@ -16,18 +16,27 @@ public:
                     if(arr[l]+arr[r]==target){
                         ans.push_back({arr[i],arr[j],arr[l],arr[r]});
                         while(r>l&&arr[l]==ans.back()[2]){
+                            
                             l++;
                         }
                         while(r>l&&arr[r]==ans.back()[3]){
+                            
                             r--;
                         }
                     
                     }
                     else if(arr[l]+arr[r]<target){
-                        l++;
+                        int xx=arr[l];
+                        while(r>l&&arr[l]==xx){
+                            l++;
+                        }
+                    
                     }
                     else{
-                       r--;
+                        int xx=arr[r];
+                        while(r>l&&arr[r]==xx){
+                            r--;
+                        }
                     }
                     
                     
