@@ -10,7 +10,7 @@ public:
         }
         count[amount]=INT_MAX;
         for(int i=idx;i<coins.size();i++){
-            if(amount>=coins[i]) count[amount]=min(count[amount],1+recur(coins,amount-coins[i],i));
+            if(amount>=coins[i]) count[amount]=min({count[amount],1+recur(coins,amount-coins[i],i)});
             else break;
         }
         return count[amount];
@@ -18,7 +18,8 @@ public:
     }
     int coinChange(vector<int>& coins, int amount) {
         
-        memset(count,-1,sizeof(count));
+    
+        for(int i=0;i<=amount;i++) count[i]=-1;
         sort(coins.begin(),coins.end());
         int ans=recur(coins,amount);
         if(ans==INT_MAX) return -1;
