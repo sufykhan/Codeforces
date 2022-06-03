@@ -10,36 +10,38 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+    ListNode* mergeTwoLists(ListNode* l11, ListNode* l22) {
         
-        if(l1==nullptr) return l2;
-        if(l2==nullptr) return l1;
-        ListNode* l3=new ListNode(0);
-        ListNode* ans=l3;
-        while(l1!=nullptr&&l2!=nullptr){
+        if(l11==nullptr) return l22;
+        if(l22==nullptr) return l11;
+        
+        if(l11->val<l22->val){
+            swap(l11,l22);
+        }
+        
+        ListNode* l1=l11;
+        ListNode* l2=l22;
+        ListNode* prevl2;
+        ListNode* prevl1;
+        
+        while(l1!=nullptr && l2!=nullptr){
             
-            if(l1->val>l2->val){
-                l3->next=new ListNode(l2->val);
-                l3=l3->next;
-                l2=l2->next;
+            if(l1!=nullptr && l2!=nullptr && l1->val>=l2->val){
+                while(l1!=nullptr && l2!=nullptr && l1->val>=l2->val){
+                    prevl2=l2;
+                    l2=l2->next;
+                }
+                prevl2->next=l1;
             }
             else{
-                l3->next=new ListNode(l1->val);
-                l3=l3->next;
-                l1=l1->next;
+                while(l1!=nullptr && l2!=nullptr &&l2->val>=l1->val){
+                    prevl1=l1;
+                    l1=l1->next;
+                }
+                prevl1->next=l2;
             }
-        }
-        while(l1!=nullptr){
-                l3->next=new ListNode(l1->val);
-                l3=l3->next;
-                l1=l1->next;
-        }
-        while(l2!=nullptr){
-                l3->next=new ListNode(l2->val);
-                l3=l3->next;
-                l2=l2->next;
-        }
-        return ans->next;     
+       }
+        return l22;
         
     }
 };
