@@ -11,14 +11,44 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-	ListNode *slow = head, *fast = head, *prev = NULL, *tmp;
-	while(fast && fast -> next) // finding mid point
-		fast = fast -> next -> next,
-		tmp = slow -> next, slow -> next = prev, prev = slow, slow = tmp;        
-	slow = (fast ? slow -> next : slow); // for odd length case as mentioned above
-	while(slow) // check if linked lists starting at prev and slow are equal
-		if(slow -> val != prev -> val) return false;
-		else slow = slow -> next, prev = prev -> next;
-	return true;
+	    
+        int cnt=0,flag=0;
+        ListNode* root=head;
+        while(root!=nullptr){
+            root=root->next;
+            cnt++;
+        }
+        flag=cnt%2;
+        cnt=cnt/2;
+        ListNode* prev=nullptr;
+        ListNode* temp;
+        ListNode* head1=head;
+        
+        while(head1!=nullptr&& cnt--){
+            temp=head1->next;
+            head1->next=prev;
+            prev=head1;
+            head1=temp;
+        }
+        
+        //Reverse starts at prev, Forward starts at head1;
+        
+        if(flag){
+            head1=head1->next;
+        }
+        
+        //Comparison starts
+        
+        while(head1!=nullptr){
+            if(head1->val==prev->val){
+                head1=head1->next;
+                prev=prev->next;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+        
     }
 };
