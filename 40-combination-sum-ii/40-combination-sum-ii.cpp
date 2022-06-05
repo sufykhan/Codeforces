@@ -1,52 +1,28 @@
 class Solution {
 public:
     vector<vector<int>>ans;
-    void recur2(vector<int>&arr,int target,int i,vector<int>&val){
-        
+    
+    void recur(vector<int>&arr,int target,vector<int>&val,int idx){
         if(target==0){
             ans.push_back(val);
-            return;
         }
-        if(target<0){
-            return;
-        }
-        if(i>=arr.size()){
-            return;
-        }
-        
-        recur(arr,target,i+1,val);
-        val.push_back(arr[i]);
-        recur(arr,target-arr[i],i+1,val);
-        val.pop_back();
-        
-    }
-     void recur(vector<int>&arr,int target,int idx,vector<int>&val){
-        
-         if(target<0){
-             return;
-         }
-         if(target==0){
-             ans.push_back(val);
-             return;
-         }
-        
         for(int i=idx;i<arr.size();i++){
-            
-            if(target>=arr[i] && (i==idx || arr[i]!=arr[i-1])){
-                val.push_back(arr[i]);
-                target-=arr[i];
-                recur(arr,target,i+1,val);
-                target+=arr[i];
-                val.pop_back();
+            if(i==idx || arr[i]!=arr[i-1]){
+                if(target-arr[i]>=0){
+                    target=target-arr[i];
+                    val.push_back(arr[i]);
+                    recur(arr,target,val,i+1);
+                    val.pop_back();
+                    target=target+arr[i];
+                }
             }
         }
         
     }
-    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
-        
+    vector<vector<int>> combinationSum2(vector<int>& arr, int target) {
+        sort(arr.begin(),arr.end());
         vector<int>val;
-        sort(candidates.begin(),candidates.end());
-        recur(candidates,target,0,val);
+        recur(arr,target,val,0);
         return ans;
     }
 };
