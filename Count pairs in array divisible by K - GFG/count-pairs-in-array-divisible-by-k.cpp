@@ -14,35 +14,14 @@ class Solution
     long long countKdivPairs(int A[], int n, int k)
     {
         //code here
-        long long ans=0,cnt=0;
+        long long ans=0,x;
         map<int,int>mp;
-        for(int i=1;i<k;i++){
-            mp[i]=0;
-        }
         for(int i=0;i<n;i++){
-            int x=A[i];
-            if(x%k==0){
-                cnt++;
-            }
-            else{
-                int y=x%k;
-                mp[y]++;
-            }
-            
+            x=A[i]%k;
+            ans+=mp[(k-x)%k];
+            mp[x]++;
         }
-        ans+=(cnt*1LL*(cnt-1))/2;
-        for(int i=1;i<k;i++){
-            int j=k-i;
-            if(i==j){
-                ans+=(mp[i]*1LL*(mp[i]-1))/2;
-            }
-            else{
-                ans+=mp[i]*mp[j];
-                mp[i]=0;
-                mp[j]=0;
-            }
-           
-        }
+        
         return ans;
     }
 };
