@@ -1,39 +1,28 @@
 class Solution {
 public:
-    int minOperations(vector<int>& nums, int target) {
-       //Sliding Window Concept
+    int minOperations(vector<int>& nums, int x) {
+       //map
         
-       // XXX****XXX => if our ans is XXXXXX then we can calculate for *****
+         int target = -x;
+        for (auto num : nums)
+            target += num;
+        int n = nums.size();
+        if (target == 0) return n;
         
-        int val=0,n=nums.size();
-        for(auto x:nums){
-            val+=x;
-        }
-        val=val-target;
+        unordered_map<int, int> left; // left[Sum(0..i)] = i
         
-        if(val<0){
-            return -1;
-        }
+        left[0] = -1;
         
-        int startX=0,endX=0,rSum=0,ans=INT_MAX;
-        
-        while(endX<n){
-            
-            rSum+=nums[endX];
-            
-            while(rSum>val){
-                rSum-=nums[startX];
-                startX++;
+        int sum = 0, res = INT_MIN;
+        for (int i = 0; i < n; ++i) {
+            sum += nums[i];
+            if (left.find(sum - target) != left.end()) {
+                res = max(res, i - left[sum-target]);
             }
-            
-            if(rSum==val){
-                ans=min(ans,n-(endX-startX+1));
-            }
-            
-            endX++;
+            left[sum] = i;
         }
-        if(ans==INT_MAX) return -1;
-        return ans;
+      
+        return (res == INT_MIN ? -1 : n - res);
         
     }
 };
