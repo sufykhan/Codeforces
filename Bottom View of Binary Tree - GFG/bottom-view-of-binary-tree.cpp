@@ -96,48 +96,29 @@ Node* buildTree(string str)
 class Solution {
   public:
     vector <int> bottomView(Node *root) {
-        if(root==NULL)return {};
-   queue<pair<Node*,int>> q;
-   vector<int> res;
-   map<int,int>m;
-   q.push({root,0});
-   while(!q.empty()){
-      int n=q.size();
-      for(int i=0;i<n;i++){
-         pair<Node*,int> p=q.front();
-         q.pop();
-         Node* temp=p.first;
-         int hd=p.second;
-         m[hd]=temp->data;
-         if(temp->left)q.push({temp->left,hd-1});
-         if(temp->right) q.push({temp->right,hd+1});
-       }
-    }
-    for(auto it:m)res.push_back(it.second);
-    return res;
     
-        // if(root==nullptr) return {};
-        // map<int,int>mp;
-        // queue<pair<Node*,int>>q;
-        // q.push({root,0});
-        // while(!q.empty()){
+        if(root==nullptr) return {};
+        map<int,int>mp;
+        queue<pair<Node*,int>>q;
+        q.push({root,0});
+        while(!q.empty()){
             
-        //     int size=q.size();
-        //     for(int i=0;i<size;i++){
-        //         Node* root1=q.front().first;
-        //         int val=q.front().second;
-        //         q.pop();
-        //         mp[val]=root1->data;
-        //         if(root1->left) q.push({root->left,val-1});
-        //         if(root1->right) q.push({root->right,val+1});
-        //     }
-        // }
+            int size=q.size();
+            for(int i=0;i<size;i++){
+                Node* root1=q.front().first;
+                int val=q.front().second;
+                q.pop();
+                mp[val]=root1->data;
+                if(root1->left) q.push({root1->left,val-1});
+                if(root1->right) q.push({root1->right,val+1});
+            }
+        }
         
-        // vector<int>ans;
-        // for(auto &x:mp){
-        //     ans.push_back(x.second);
-        // }
-        // return ans;
+        vector<int>ans;
+        for(auto &x:mp){
+            ans.push_back(x.second);
+        }
+        return ans;
     }
 };
 
