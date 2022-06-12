@@ -11,62 +11,28 @@
  */
 class Solution {
 public:
-    vector<int>left={};
-    vector<int>right={};
-    
-    void recur(TreeNode* root,int val,int prev){
-        left.push_back(val);
-        if(root->left){
-            recur(root->left,2*val,val);
-        }
-        else{
-            if(root->right){
-                recur(root->right,2*val+1,val);
-            }
-        }
-    }
-   
-    void recur2(TreeNode* root,int val,int prev){
-        right.push_back(val);
-        if(root->right){
-            recur2(root->right,2*val,val);
-        }
-        else{
-            if(root->left){
-            
-                recur2(root->left,2*val-1,val);
-            }
-        }
-    }
     int widthOfBinaryTree(TreeNode* root) {
-         if (!root) return 0;
-        unsigned int max = 0;
-        queue<pair<TreeNode*, unsigned int>> q;
-        q.push(pair<TreeNode*, unsigned int>(root, 1));
-        while (!q.empty()) {
-            unsigned int l = q.front().second, r = l; // right started same as left
-            for (int i = 0, n = q.size(); i < n; i++) {
-                TreeNode* node = q.front().first;
-                r = q.front().second;
+        int ans=0;
+        queue<pair<TreeNode*,unsigned int>>q;
+        q.push({root,0});
+        while(!q.empty()){
+            int size=q.size();
+            int mini=q.front().second;
+            int left,right;
+            for(int i=0;i<size;i++){
+                
+                unsigned int curr=q.front().second-mini;
+                TreeNode* root1=q.front().first;
                 q.pop();
-                if (node->left) q.push(pair<TreeNode*,unsigned int>(node->left, r * 2));
-                if (node->right) q.push(pair<TreeNode*, unsigned int>(node->right, r * 2 + 1));
+                if(i==0) left=curr;
+                if(i==size-1) right=curr;
+                
+                if(root1->left) q.push({root1->left,2*curr+1});
+                if(root1->right) q.push({root1->right,2*curr+2});
+                
             }
-            max = std::max(max, r + 1 - l);
+            ans=max(ans,right-left+1);
         }
-        return max;
-        
-//         TreeNode* root1=root;
-//         TreeNode* root2=root;
-//         int ans=0;
-        
-//         recur(root1,0,0);
-//         recur2(root2,1,1);
-        
-//         for(int i=0;i<left.size() && i<right.size();i++){
-//             ans=max(ans,right[i]-left[i]);
-//         }
-//         return ans;
-        
+        return ans;
     }
 };
