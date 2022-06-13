@@ -1,30 +1,22 @@
 class Solution {
 public:
-    
-    int util(int i,int j,vector<vector<int>>&arr,vector<vector<int>>&dp){
-        
-        if(j>i){
-            return 0;
+    int minimumTotal(vector<vector<int>>&arr) {
+        vector<vector<int>>dp=arr;
+        int n=arr.size();
+        for(int i=1;i<n;i++){
+            for(int j=0;j<=i;j++){
+                dp[i][j]=INT_MAX;
+                if(j!=i) dp[i][j]=dp[i-1][j];
+                if(j>=1) dp[i][j]=min(dp[i][j],dp[i-1][j-1]);
+                dp[i][j]+=arr[i][j];
+                cout<<dp[i][j]<<" ";
+            }
+            cout<<"\n";
         }
-        if(i==arr.size()){
-            return 0;
+        int ans=INT_MAX;
+        for(int i=0;i<n;i++){
+            ans=min(dp[n-1][i],ans);
         }
-        
-        if(dp[i][j]!=-1)
-        {
-            return dp[i][j];
-        }
-        return dp[i][j]=arr[i][j]+min(util(i+1,j,arr,dp),util(i+1,j+1,arr,dp));
-        
-        
-    }
-    
-    int minimumTotal(vector<vector<int>>& arr) {
-        
-        int i=0,j=0;
-        vector<vector<int>>dp(arr.size(),vector<int>(arr.size(),-1));
-        
-        return util(i,j,arr,dp);
-        
+        return ans;
     }
 };
