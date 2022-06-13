@@ -9,9 +9,9 @@ public:
                 if(j!=i) dp[i][j]=dp[i-1][j];
                 if(j>=1) dp[i][j]=min(dp[i][j],dp[i-1][j-1]);
                 dp[i][j]+=arr[i][j];
-                cout<<dp[i][j]<<" ";
+               // cout<<dp[i][j]<<" ";
             }
-            cout<<"\n";
+            //cout<<"\n";
         }
         int ans=INT_MAX;
         for(int i=0;i<n;i++){
