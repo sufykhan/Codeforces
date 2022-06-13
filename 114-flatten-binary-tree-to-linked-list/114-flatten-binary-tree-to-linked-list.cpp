@@ -21,7 +21,22 @@ public:
         root->left=nullptr;
         prev=root;
     }
-    void flatten(TreeNode* root) {
-        recur(root);
-    }
+    void flatten(TreeNode *root) {
+	while (root) {
+		if (root->left && root->right) {
+			TreeNode* t = root->left;
+			while (t->right)
+				t = t->right;
+			t->right = root->right;
+		}
+
+        if(root->left)
+		    root->right = root->left;
+		root->left = NULL;
+		root = root->right;
+	}
+   }
+    // void flatten(TreeNode* root) {
+    //     recur(root);
+    // }
 };
