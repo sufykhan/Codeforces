@@ -1,6 +1,3 @@
-# Update: Practising for the Interviews
-
-### Contact sufyankhan9678@gmail.com if you like to prepare together from 1st June 2022
 
 ## Best 50 Question from all the Coding Platforms 
 
