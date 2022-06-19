@@ -11,32 +11,29 @@
  */
 class BSTIterator {
 public:
-    int curr=0;
-    vector<int>v;
-    
-    void ino(TreeNode* root){
-        if(root==nullptr){
-            return;
-        }
-        ino(root->left);
-        v.push_back(root->val);
-        ino(root->right);
-    }
+    stack<TreeNode*> s;
     BSTIterator(TreeNode* root) {
-        ino(root);
+        partialInorder(root);
+    }
+    
+    void partialInorder(TreeNode* root){
+        while(root != NULL){
+            s.push(root);
+            root = root->left;
+        }
     }
     
     int next() {
-        int x=v[curr];
-        curr++;
-        return x;
+        TreeNode* top = s.top();
+        s.pop();
+        partialInorder(top->right);
+        return top->val;
     }
     
     bool hasNext() {
-        return (curr<v.size());
+        return !s.empty();
     }
 };
-
 /**
  * Your BSTIterator object will be instantiated and called as such:
  * BSTIterator* obj = new BSTIterator(root);
