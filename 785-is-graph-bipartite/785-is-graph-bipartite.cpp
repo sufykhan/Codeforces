@@ -1,23 +1,18 @@
 class Solution {
 public:
-    
-    
-    bool BFS(int i,vector<vector<int>>&graph,int val,vector<bool>&vis,vector<int>color){
+    bool dfs(vector<vector<int>>&adj,vector<bool>&vis,vector<int>&val,int i){
         
-        color[i]=val;
-        vis[i]=true;
-        
-        for(auto x:graph[i]){
-            if(!vis[x]){
-                
-                if(!BFS(x,graph,val^1,vis,color)){
-                    return false;
-                }
-                
+        for(auto &x:adj[i]){
+            if(vis[x]==true && val[x]==val[i]){
+                return false;
             }
             else{
-                if(color[x]==color[i]){
-                    return false;
+                if(!vis[x]){
+                    vis[x]=true;
+                    val[x]=val[i]^1;
+                    if(!dfs(adj,vis,val,x)){
+                        return false;
+                    }
                 }
             }
         }
@@ -25,13 +20,13 @@ public:
         
     }
     bool isBipartite(vector<vector<int>>& graph) {
-        int val=0;
-        vector<bool>vis(graph.size(),false);
-        vector<int>color(graph.size(),-1);
-        
-        for(int i=0;i<graph.size();i++){
+       int V=graph.size();
+        vector<bool>vis(V,false);
+        vector<int>val(V,false);
+        for(int i=0;i<V;i++){
             if(!vis[i]){
-                if(!BFS(i,graph,val,vis,color)){
+                val[i]=0;
+                if(!dfs(graph,vis,val,i)){
                     return false;
                 }
             }
