@@ -12,7 +12,7 @@ public:
             
             m=(double)(nums[i][1]-nums[i-1][1])/(nums[i][0]-nums[i-1][0]);
             c=nums[i][1]-m*nums[i][0];
-            cout<<m<<" "<<c<<" ";
+            //cout<<m<<" "<<c<<" ";
             int j=i+1;
             while(j<nums.size() && abs(m*nums[j][0]+c-nums[j][1])<1e-9){
                 j++;
