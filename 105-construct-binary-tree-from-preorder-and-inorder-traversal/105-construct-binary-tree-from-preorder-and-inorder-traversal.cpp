@@ -11,29 +11,23 @@
  */
 class Solution {
 public:
-    int k=0;
-    TreeNode* recur(int i,int j,vector<int>&pre,vector<int>&ino,unordered_map<int,int>&mp){
-    
-        if(i>j){
-            return nullptr;
-        }
-        TreeNode* root=new TreeNode(pre[k++]);
-        int mid=mp[root->val];
-        // if(i==j){
-        //     return root;
-        // }
-        root->left=recur(i,mid-1,pre,ino,mp); 
-        root->right=recur(mid+1,j,pre,ino,mp);
-        
-        return root;
-        
+    vector<int>pre;
+    vector<int>in;
+
+    TreeNode* recur(int &root,int l,int r){  //Keenly understand why pass by reference is used in root: To update the root all the time after left to right call
+        if(l>r) return nullptr;
+        int piv=l;
+        while(pre[root]!=in[piv]) piv++;
+        TreeNode* ans=new TreeNode(in[piv]);
+        root++;
+        ans->left=recur(root,l,piv-1);
+        ans->right=recur(root,piv+1,r);
+        return ans;
     }
-    TreeNode* buildTree(vector<int>& pre, vector<int>& ino) {
-        unordered_map<int,int>mp;
-        for(int i=0;i<ino.size();i++){
-            mp[ino[i]]=i;
-        }
-        int i=0,j=ino.size()-1;
-        return recur(i,j,pre,ino,mp);
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        pre=preorder;
+        in=inorder;
+        int root=0,l=0,r=pre.size()-1;
+        return recur(root,l,r);
     }
 };
