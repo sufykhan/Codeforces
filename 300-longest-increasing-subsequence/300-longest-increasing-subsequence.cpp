@@ -3,6 +3,7 @@ public:
     int lengthOfLIS(vector<int>& nums) {
         
         vector<int>dp(nums.size()+1,1);
+        
         int n=nums.size();
         if(n==1) return 1;
         int ans=0;
