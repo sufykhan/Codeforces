@@ -12,20 +12,16 @@
 class Solution {
 public:
     
-    TreeNode* recur(vector<int>&nums,int i,int j){
-        if(i>=j){
-            return NULL;
+    TreeNode* sortedArrayToBST(vector<int>& nums,int l=0,int r=100000) {
+        if(r==100000) r=nums.size();
+        if(r<=l){
+            return nullptr;
         }
-        
-        int mid=i+(j-i)/2;
-       // cout<<i<<" "<<j<<"\n";
+        int mid=l+(r-l)/2;
         TreeNode* root=new TreeNode(nums[mid]);
-     
-        root->left=recur(nums,i,mid);
-        root->right=recur(nums,mid+1,j);
+        root->left=sortedArrayToBST(nums,l,mid);
+        root->right=sortedArrayToBST(nums,mid+1,r);
         return root;
     }
-    TreeNode* sortedArrayToBST(vector<int>& nums) {
-        return recur(nums,0,nums.size());
-    }
+    
 };
