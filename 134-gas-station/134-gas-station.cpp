@@ -1,7 +1,6 @@
 class Solution {
 public:
     int canCompleteCircuit(vector<int>& A, vector<int>& B) {
-        vector<int>ans(A.size(),0);
         long long int tot=0;
         int pos=0;
         for(int i=0;i<A.size();i++){
