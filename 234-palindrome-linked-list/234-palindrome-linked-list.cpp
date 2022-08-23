@@ -12,14 +12,18 @@ class Solution {
 public:
     bool isPalindrome(ListNode* head) {
 	    
+        //Here we are counting the length of the linked list
         int cnt=0,flag=0;
         ListNode* root=head;
         while(root!=nullptr){
             root=root->next;
             cnt++;
         }
-        flag=cnt%2;
+        flag=cnt%2;  //to check if we need to skip middle element or not.
         cnt=cnt/2;
+        
+        //Here we are reversing the half of the linked list
+        // Ex.=  1->2->3->3->2->1 converted to  1<-2<-3  3->2->1
         ListNode* prev=nullptr;
         ListNode* temp;
         ListNode* head1=head;
@@ -31,7 +35,7 @@ public:
             head1=temp;
         }
         
-        //Reverse starts at prev, Forward starts at head1;
+        //Reverse Linked List starts at prev, Forward part starts at head1;
         
         if(flag){
             head1=head1->next;
