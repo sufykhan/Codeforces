@@ -1,33 +1,33 @@
 class Solution {
 public:
-    string merge(string s1,string s2){
-        int n=min(s1.size(),s2.size());
-        string ans="";
-        for(int i=0;i<n;i++){
-            if(s1[i]==s2[i]){
-                ans+=s1[i];
-            }
-            else{
-                break;
-            }
+    struct Trie{
+        unordered_map<char,Trie*> child;
+        bool isword=false;
+    }root;
+    void insert(string word){
+        auto cur=&root;
+        for(char c : word){
+            if(cur->child.find(c)==cur->child.end())
+                cur->child[c]=new Trie();
+            cur=cur->child[c];
         }
-        return ans;
-    }
-    string recur(vector<string>&strs,int l,int h){
-        if(l==h){
-            return strs[l];
-        }
-        int mid=l+(h-l)/2;
-        string s1=recur(strs,l,mid);
-        string s2=recur(strs,mid+1,h);
-        string common=merge(s1,s2);
-        return common;
-        
+        cur->isword=true;
     }
     string longestCommonPrefix(vector<string>& strs) {
         
-       if(strs.size()==0) return "";
-        return recur(strs,0,strs.size()-1);
+        if(strs.size()==0) return "";
         
+        for(auto word:strs)
+            insert(word);
+        
+        auto cur=&root;
+        string res="";
+        
+        while(cur&&!cur->isword&&(cur->child.size()==1)){
+            auto it=cur->child.begin();
+            res+=it->first;
+            cur=it->second;
+        }
+        return res;
     }
 };
