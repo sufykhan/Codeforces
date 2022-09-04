@@ -13,54 +13,32 @@ class Solution {
 public:
     int mini=INT_MAX;
     int maxi=INT_MIN;
-    int dept=0;
-
-    void recur(TreeNode* root,int val,int prev){
-        mini=min(mini,val);
-        maxi=max(maxi,val);
-        dept=max(prev,dept);
-        if(root->left){
-            recur(root->left,val-1,prev+1);
+    void recur(TreeNode* root,map<pair<int,int>,vector<int>>&mp,int pos,int level)
+    {
+        if(root==nullptr){
+            return;
         }
-        if(root->right){
-                recur(root->right,val+1,prev+1);
-        }
-    }
-    void recur2(TreeNode* root,int val,vector<vector<vector<int>>>&ans2,int prev){
-        ans2[prev][val].push_back(root->val);
-        if(root->left){
-            recur2(root->left,val-1,ans2,prev+1);
-        }
-        if(root->right){
-            recur2(root->right,val+1,ans2,prev+1);
-        }
+        maxi=max(maxi,pos);
+        mini=min(mini,pos);
+        
+        mp[{pos,level}].push_back(root->val);
+        
+        recur(root->right,mp,pos+1,level+1);
+        recur(root->left,mp,pos-1,level+1);
+        
     }
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        
-        TreeNode* root1=root;
-        recur(root1,0,0);
-        
-        int newVal=abs(mini);
-        int size=maxi-mini+1;
-        
-        
-        vector<vector<vector<int>>>ans2(dept+1,vector<vector<int>>(size,vector<int>()));
-    
-        
-        recur2(root,newVal,ans2,0);
-        
-        for(int i=0;i<=dept;i++){
-            for(int j=0;j<size;j++){
-                sort(ans2[i][j].begin(),ans2[i][j].end());
-            }
-        }
-        vector<vector<int>>ans(size,vector<int>());
-        
-        for(int i=0;i<size;i++){
-            for(int j=0;j<=dept;j++){
-                for(int k=0;k<ans2[j][i].size();k++){
-                    ans[i].push_back(ans2[j][i][k]);
-                }
+        map<pair<int,int>,vector<int>>mp;
+        recur(root,mp,0,0);
+        int n=maxi-mini+1;
+        vector<vector<int>>ans(n,vector<int>());
+        int i=-1*mini;
+        for(auto x:mp){
+            vector<int>val=x.second;
+            sort(val.begin(),val.end());
+            
+            for(auto y:val){
+               ans[x.first.first + i].push_back(y); 
             }
             
         }
