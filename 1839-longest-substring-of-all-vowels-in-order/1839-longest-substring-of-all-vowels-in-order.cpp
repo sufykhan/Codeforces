@@ -25,7 +25,7 @@ public:
         }
        if(v.size()!=0 && v.back().first!=ans.back()) v.push_back({ans[word.size()-1],cnt+1});
         
-       // for(auto x:v) cout<<x.first<<" "<<x.second<<"\n";
+      // for(auto x:v) cout<<x.first<<" "<<x.second<<"\n";
         
         int maxi=0;
         for(int i=0;i<v.size();i++){
@@ -36,6 +36,8 @@ public:
                     cnt1+=v[i+j-1].second;
                     j++;
                 }
+                i=i+j-1;
+                i--;
                 if(j==6) maxi=max(cnt1,maxi);
             }
         }
