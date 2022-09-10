@@ -1,43 +1,64 @@
 class Solution {
 public:
-    int myAtoi(string input) {
-       int sign = 1; 
-        int result = 0; 
-        int index = 0;
-        int n = input.size();
+    int myAtoi(string s) {
+        int n=s.size();
         
-        // Discard all spaces from the beginning of the input string.
-        while (index < n && input[index] == ' ') { 
-            index++; 
-        }
-        
-        // sign = +1, if it's positive number, otherwise sign = -1. 
-        if (index < n && input[index] == '+') {
-            sign = 1;
-            index++;
-        } else if (index < n && input[index] == '-') {
-            sign = -1;
-            index++;
-        }
-        
-
-        while (index < n && isdigit(input[index])) {
-            int digit = input[index] - '0';
-
-            // Check overflow and underflow conditions. 
-            if ((result > INT_MAX / 10) || (result == INT_MAX / 10 && digit > INT_MAX % 10)) { 
-                // If integer overflowed return 2^31-1, otherwise if underflowed return -2^31.    
-                return sign == 1 ? INT_MAX : INT_MIN;
+        int pos=0; // starting point of the string
+        for(int i=0;i<n;i++){
+            if(s[i]==' '){
+                pos=i+1;
             }
-            
-            // Append current digit to the result.
-            result = 10 * result + digit;
-            index++;
+            else{
+                break;
+            }
+        }
+        //positive integer handled
+        int type=1;
+        if(s[pos]=='-'){
+            pos++;
+            type=-1;
+        }
+        else if(s[pos]=='+'){
+            pos++;
         }
         
-        // We have formed a valid number without any overflow/underflow.
-        // Return it after multiplying it with its sign.
-        return sign * result;
-    
+        
+        
+        while(s[pos]=='0') pos++;
+        
+        string news="";
+        for(int i=pos;i<n;i++){
+            int a=s[i]-'0';
+            if(a>=0 && a<=9){
+                news+=s[i];
+            }
+            else{
+                break;
+            }
+        }
+        long int upp=pow(2,31)-1;
+        long long int low=-1*pow(2,31);
+        
+        if(news.size()>10){
+            if(type==1) return upp;
+            else return low;
+        }
+        reverse(news.begin(),news.end());
+        
+        
+       
+        long long int ans=0,mul=1;
+        
+        for(int i=0;i<news.size();i++){
+            int b=(news[i]-'0');
+            ans+=mul*1LL*(b);
+            mul=mul*10;
+            
+            if(ans*type>upp) return upp;
+            if(ans*type<low) return low;
+        }
+
+        ans=type*ans;
+        return ans;
     }
 };
