@@ -43,16 +43,18 @@ public:
             if(type==1) return upp;
             else return low;
         }
-        reverse(news.begin(),news.end());
+        //reverse(news.begin(),news.end());
+        int nn=news.size();
         
+        //long long int ans=0,mul=1;
         
-       
-        long long int ans=0,mul=1;
+        long long int ans=0,mul=pow(10,nn-1);
         
         for(int i=0;i<news.size();i++){
             int b=(news[i]-'0');
             ans+=mul*1LL*(b);
-            mul=mul*10;
+            //mul=mul*10;
+            mul=mul/10;
             
             if(ans*type>upp) return upp;
             if(ans*type<low) return low;
