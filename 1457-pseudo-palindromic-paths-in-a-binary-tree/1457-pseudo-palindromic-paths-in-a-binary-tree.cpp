@@ -11,38 +11,22 @@
  */
 class Solution {
 public:
-    int ans;
+    int ans=0;
     
-    void dfs(TreeNode* root,vector<int>&v,vector<int>&g){
+    void dfs(TreeNode* root,int cnt=0){
         if(root==nullptr) {
             return;
         };
-        v[root->val]++;
-        g.push_back(root->val);
-        
-        if(root->left==nullptr && root->right==nullptr){
-             int val=0;
-            // for(auto x:g) cout<<x<<" ";
-            // cout<<"-->";
-            for(int i=0;i<10;i++){
-                if(v[i]%2==1) val++;
-            }
-            if(val<=1) ans++;
-           // cout<<val<<"\n";
+        cnt=cnt^(1<<root->val);
+        if(root->left==nullptr && root->right==nullptr && ((cnt&(cnt-1))==0)){
+             ans++;
         }
-        dfs(root->left,v,g);
-        dfs(root->right,v,g);
-        g.pop_back();
-        v[root->val]--;
-       
-        
-       
+        dfs(root->left,cnt);
+        dfs(root->right,cnt);
+        cnt=cnt^(1<<root->val);
     }
     int pseudoPalindromicPaths (TreeNode* root) {
-        ans=0;
-        vector<int>v(10,0);
-        vector<int>g;
-        dfs(root,v,g);
+        dfs(root);
         return ans;
     }
 };
