@@ -1,31 +1,60 @@
+struct Node{
+  
+    Node* arr[26];
+    bool flg;
+    
+    void create(char x,Node* root){
+        arr[x-'a']=root;
+    }
+    
+    Node* get(char x){
+        return arr[x-'a'];
+    }
+    
+    bool find(char x){
+        return arr[x-'a']!=nullptr;
+    }
+    
+};
+
 class Trie {
+    Node* ans;
 public:
-    vector<string>v;
     Trie() {
-        vector<string>v={};
+        ans=new Node();    
     }
     
     void insert(string word) {
-        if(!search(word)) v.push_back(word);
+        Node* root=ans;
+        for(auto x:word){
+            if(!root->find(x)){
+                root->create(x,new Node());
+            }
+            root=root->get(x);
+        }
+        root->flg=true;
     }
     
     bool search(string word) {
-        for(auto &x:v){
-            if(x==word){
-                return true;
+        Node* root=ans;
+        for(auto x:word){
+            if(!root->find(x)){
+                return false;
             }
+            root=root->get(x);
         }
-        return false;
+        return root->flg;
     }
     
     bool startsWith(string prefix) {
-        for(auto &x:v){
-            string s=x.substr(0,prefix.size());
-            if(s==prefix){
-                return true;
+        Node* root=ans;
+        for(auto x:prefix){
+            if(!root->find(x)){
+                return false;
             }
+            root=root->get(x);
         }
-        return false;
+        return true;
     }
 };
 
