@@ -28,7 +28,7 @@ public:
                 r=mid;
             }
             else{
-                l=mid;
+                l=mid+1;
             }
         }
        
