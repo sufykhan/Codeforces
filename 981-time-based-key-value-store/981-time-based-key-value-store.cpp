@@ -1,7 +1,7 @@
 class TimeMap {
 public:
-    map<string,set<int>>t;
-    map<string,string>mp;
+    unordered_map<string,set<int>>t;
+    unordered_map<string,string>mp;
     
     string getV(string s,int time){
         string ans=s;
