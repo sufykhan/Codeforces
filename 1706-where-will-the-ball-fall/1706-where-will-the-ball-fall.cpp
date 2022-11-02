@@ -1,21 +1,30 @@
 class Solution {
 public:
     vector<int> findBall(vector<vector<int>>& grid) {
-        vector<int> result(grid[0].size(), 0);
-        for (int i = 0; i < grid[0].size(); i++) {
-            result[i] = findBallDropColumn(0, i, grid);
+        int n=grid.size();
+        int m=grid[0].size();
+        
+        vector<int>v(m,-1);
+        for(int k=0;k<m;k++){
+            int x=k;
+            bool flg=true;
+            for(int i=0;i<n;i++){
+                if(x+1<m && grid[i][x]==1 && grid[i][x+1]==1){
+                     x+=1;
+                }
+                else if(x-1>=0 && grid[i][x]==-1 && grid[i][x-1]==-1){
+                     x-=1;
+                }
+                else{
+                    flg=false;
+                }
+            }
+           
+            if(flg){
+                v[k]=x;
+            }
+            
         }
-        return result;
-    }
-
-    int findBallDropColumn(int row, int col, vector<vector<int>>& grid) {
-        // base case; ball reached the last row
-        if (row == grid.size()) return col;
-        int nextColumn = col + grid[row][col];
-        if (nextColumn < 0 || nextColumn > grid[0].size() - 1 ||
-            grid[row][col] != grid[row][nextColumn]) {
-            return -1;
-        }
-        return findBallDropColumn(row + 1, nextColumn, grid);
+        return v;
     }
 };
