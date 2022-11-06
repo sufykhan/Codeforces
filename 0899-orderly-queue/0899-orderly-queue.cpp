@@ -1,13 +1,15 @@
 class Solution {
 public:
-    string orderlyQueue(string S, int K) {
-       if (K > 1) {
-            sort(S.begin(), S.end());
-            return S;
+    string orderlyQueue(string s, int k) {
+        if(k>1){
+            sort(s.begin(),s.end());
+            return s;
         }
-        string res = S;
-        for (int i = 1; i < S.length(); i++)
-            res = min(res, S.substr(i) + S.substr(0, i));
-        return res; 
+        string ans=s;
+        for(int i=0;i<s.size();i++){
+            string val=s.substr(i)+s.substr(0,i);
+            if(ans>val) ans=val;
+        }
+        return ans;
     }
 };
