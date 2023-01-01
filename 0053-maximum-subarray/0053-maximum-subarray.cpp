@@ -1,21 +1,32 @@
 class Solution {
 public:
+    
+    int recur(int left,int right,vector<int>&nums){
+        
+        if(left>right) return INT_MIN;
+        
+        int mid=left+(-left+right)/2;
+        int maxL=0;
+        int maxR=0;
+        int sum=0;
+        for(int i=mid-1;i>=left;i--){
+            sum+=nums[i];
+            maxL=max(maxL,sum);
+        }
+        sum=0;
+        for(int i=mid+1;i<=right;i++){
+            sum+=nums[i];
+            maxR=max(maxR,sum);
+        }
+        int tot=maxL+maxR+nums[mid];
+        
+        int lefti=recur(left,mid-1,nums);
+        int righti=recur(mid+1,right,nums);
+        
+        return max({tot,lefti,righti});
+    }
     int maxSubArray(vector<int>& nums) {
-
-        vector<int>pref((int)nums.size()+1,0);
-        for(int i=0;i<nums.size();i++){
-            pref[i+1]=pref[i]+nums[i];
-        }
-        int maxi=INT_MIN;
-        int ans=INT_MIN;
-        for(int i=nums.size();i>0;i--){
-           
-            ans=max(ans,pref[i]);
-            if(maxi!=INT_MIN) ans=max(ans,maxi-pref[i]);
-            maxi=max(maxi,pref[i]);
-        }
-        
-        return ans;
-        
+        int n=nums.size();
+        return recur(0,n-1,nums);
     }
 };
