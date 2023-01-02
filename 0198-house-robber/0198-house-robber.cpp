@@ -1,13 +1,11 @@
 class Solution {
 public:
-    int dp[105];
-    int recur(int idx,vector<int>&nums){
-        if(idx>=nums.size()) return 0;
-        if(dp[idx]!=-1) return dp[idx];
-        return dp[idx]=max(nums[idx]+recur(idx+2,nums),recur(idx+1,nums));
-    }
     int rob(vector<int>& nums) {
-        memset(dp,-1,sizeof(dp));
-        return recur(0,nums);
+        vector<int>dp(nums.size()+1,0);
+        dp[(int)nums.size()-1]=nums.back();
+        for(int i=nums.size()-2;i>=0;i--){
+            dp[i]=max(dp[i+2]+nums[i],dp[i+1]);
+        }
+        return dp[0];
     }
 };
