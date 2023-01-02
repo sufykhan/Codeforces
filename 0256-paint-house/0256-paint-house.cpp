@@ -1,19 +1,19 @@
 class Solution {
 public:
-    int dp[105][4];
-    int recur(int idx,int choice,vector<vector<int>>costs){
-        if(idx>=costs.size()) return 0;
-        if(dp[idx][choice]!=-1) return dp[idx][choice];
-        int ans=INT_MAX;
-        for(int i=0;i<=2;i++){
-            if(i!=choice){
-                ans=min(ans,costs[idx][i]+recur(idx+1,i,costs));
+    
+    int minCost(vector<vector<int>>& cost) {
+        int n=cost.size();
+        vector<vector<int>>dp(n+1,vector<int>(3,0));
+        for(int i=n-1;i>=0;i--){
+            for(int j=0;j<=2;j++){
+                int mini=INT_MAX;
+                for(int k=0;k<=2;k++){
+                    if(k!=j) mini=min(mini,cost[i][j]+dp[i+1][k]);
+                }
+                dp[i][j]=mini;
             }
+            
         }
-        return dp[idx][choice]=ans;
-    }
-    int minCost(vector<vector<int>>& costs) {
-        memset(dp,-1,sizeof(dp));
-        return recur(0,3,costs); 
+        return min({dp[0][0],dp[0][1],dp[0][2]});
     }
 };
