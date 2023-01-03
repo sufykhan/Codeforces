@@ -1,20 +1,13 @@
 class Solution {
 public:
-    int getMax(vector<int>nums){
-        int maxi=INT_MIN,val=1;
-        for(auto x:nums){
-            val=val*x;
-            maxi=max(maxi,val);
-            if(x==0){
-                val=1;
-            }
-        }
-        return maxi;
-    }
     int maxProduct(vector<int>& nums) {
-        int ans=getMax(nums);
-        reverse(nums.begin(),nums.end());
-        ans=max(ans,getMax(nums));
+        int maxi=1,mini=1,ans=INT_MIN;
+        for(auto x:nums){
+            int temp=max({x,maxi*x,mini*x});
+            mini=min({x,maxi*x,mini*x});
+            maxi=temp;
+            ans=max(ans,maxi);
+        }
         return ans;
     }
 };
